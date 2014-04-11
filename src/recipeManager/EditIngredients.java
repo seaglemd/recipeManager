@@ -10,6 +10,7 @@ import javax.swing.border.TitledBorder;
 public class EditIngredients {
 	//mhmmm
 	//added code
+	//the bestestcode that never worked
 	private JPanel editIngredientsPanel;
 	private Color bgColor = new Color(255, 255, 255);
 	
