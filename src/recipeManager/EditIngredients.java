@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public class EditIngredients {
-	
+	//mhmmm
 	private JPanel editIngredientsPanel;
 	private Color bgColor = new Color(255, 255, 255);
 	
