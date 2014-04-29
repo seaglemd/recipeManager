@@ -108,7 +108,8 @@ public class RecipeManager {
 			selectRecipePanel.addSelectedRecipesToPanel(recipes);
 			selectRecipe = selectRecipePanel.setSelectRecipePanelDimensions();
 			
-			c.fill = GridBagConstraints.HORIZONTAL;		
+			c.fill = GridBagConstraints.HORIZONTAL;
+			c.anchor = GridBagConstraints.PAGE_START;
 			c.gridwidth = 1;
 			c.gridx = 0;
 			c.gridy = 1;
