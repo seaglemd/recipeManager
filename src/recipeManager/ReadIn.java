@@ -1,16 +1,23 @@
 package recipeManager;
 
 import java.io.*;
+import java.util.*;
 
 public class ReadIn
 {
-    private static ObjectInputStream input;
-    private static Object obtainedData;
+	private static InputStream file;
+    private static InputStream buffer;
+    private static ObjectInput input;
+    private static ArrayList<Recipe> obtainedData;
 
-    public static Object readData(String dataName) throws ClassNotFoundException, IOException
+    public static ArrayList<Recipe> readData(String dataName) throws ClassNotFoundException, IOException
     {
-        input = new ObjectInputStream(new FileInputStream(dataName+".dat"));
-        obtainedData = (Object)input.readObject();
+        file = new FileInputStream(dataName + ".dat");
+        buffer = new BufferedInputStream(file);
+        input = new ObjectInputStream(buffer);
+        
+        ArrayList<Recipe> obtainedData = (ArrayList<Recipe>)input.readObject();
+        
         input.close();
         return obtainedData;
     }

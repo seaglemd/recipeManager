@@ -26,7 +26,7 @@ public class AddRecipe{
 
 	private Recipe newRecipe;
 	private JLabel addIngredientLabel;
-	private JLabel addRecipeLabel;
+	protected JLabel addRecipeLabel;
 	private ImageIcon addIngredientIcon;
 	private ImageIcon addIngredientIconO;
 	private ImageIcon addRecipeIcon;
@@ -50,6 +50,7 @@ public class AddRecipe{
     private JTextArea recipeInstructions;
     private JTextField recipeTitle;
     private Color bgColor = new Color(255, 255, 255);
+    private int count;
     /**
      * Creates new form NewJFrame
      */
@@ -65,7 +66,7 @@ public class AddRecipe{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	count = 1;
         panCreate = new JPanel();
         amount = new JTextField();
         jLabel3 = new JLabel();
@@ -77,8 +78,8 @@ public class AddRecipe{
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         recipeInstructions = new javax.swing.JTextArea();
-        mainIngredient = new javax.swing.JComboBox();
-        mealCatagory = new javax.swing.JComboBox();
+        mainIngredient = new JComboBox();
+        mealCatagory = new JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -118,9 +119,9 @@ public class AddRecipe{
         categoryArray = new String[] { "Select", "Breakfast", "Lunch", "Dinner", "Dessert" };
         mainIngredientArray = new String[] { "Select", "Meat", "Dairy", "Sweets", "Bread" };
         
-        mainIngredient.setModel(new javax.swing.DefaultComboBoxModel(mainIngredientArray));
+        mainIngredient.setModel(new DefaultComboBoxModel(mainIngredientArray));
 
-        mealCatagory.setModel(new javax.swing.DefaultComboBoxModel(categoryArray));
+        mealCatagory.setModel(new DefaultComboBoxModel(categoryArray));
 
         jLabel5.setText("Main Ingredient");
 
@@ -131,99 +132,99 @@ public class AddRecipe{
         listIngredients.setRows(5);
         jScrollPane2.setViewportView(listIngredients);
         panCreate.setBackground(bgColor);
-        javax.swing.GroupLayout panCreateLayout = new javax.swing.GroupLayout(panCreate);
+        javax.swing.GroupLayout panCreateLayout = new GroupLayout(panCreate);
         panCreate.setLayout(panCreateLayout);
         panCreateLayout.setHorizontalGroup(
-            panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(panCreateLayout.createSequentialGroup()
-                .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(panCreateLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(recipeInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(recipeInstructions, GroupLayout.PREFERRED_SIZE, 253, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(panCreateLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                                .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(mainIngredient, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(mainIngredient, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(mealCatagory, 0, 105, Short.MAX_VALUE)))
                             .addGroup(panCreateLayout.createSequentialGroup()
                                 .addGap(57, 57, 57)
-                                .addComponent(addRecipeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(addRecipeLabel, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(panCreateLayout.createSequentialGroup()
-                        .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(panCreateLayout.createSequentialGroup()
-                                .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(addIngredientLabel))
                                 .addGap(18, 18, 18)
-                                .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane2)
-                                    .addComponent(recipeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(recipeTitle, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
                                     .addGroup(panCreateLayout.createSequentialGroup()
-                                        .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(ingredient, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                            .addComponent(ingredient, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel2))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel3)
-                                            .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(amount, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panCreateLayout.setVerticalGroup(
-            panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCreateLayout.createSequentialGroup()
+            panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, panCreateLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(recipeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(recipeTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
-                .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addGap(13, 13, 13)
-                .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(addIngredientLabel)
-                    .addComponent(ingredient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ingredient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(amount, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(recipeInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCreateLayout.createSequentialGroup()
-                        .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(recipeInstructions, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+                    .addGroup(GroupLayout.Alignment.TRAILING, panCreateLayout.createSequentialGroup()
+                        .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(mealCatagory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mealCatagory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(mainIngredient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mainIngredient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(addRecipeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addRecipeLabel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(actualPanel);
+        GroupLayout layout = new GroupLayout(actualPanel);
         actualPanel.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panCreate, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panCreate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 22, Short.MAX_VALUE))
         );
         listIngredients.setEditable(false);
@@ -250,14 +251,7 @@ public class AddRecipe{
         newRecipe.setInstructions(recipeInstructions.getText());
         newRecipe.setCategory(categoryArray[mealCatagory.getSelectedIndex()]);
         newRecipe.setMainIngredient(mainIngredientArray[mainIngredient.getSelectedIndex()]);
-        recipeTitle.setText("");
-        ingredient.setText("");
-        amount.setText("");
-        listIngredients.setText("");
-        recipeInstructions.setText("");
-        mealCatagory.setSelectedIndex(0);
-        mainIngredient.setSelectedIndex(0);
-        
+        /*
         String recipeInfoTest = "You have added a recipe! \n" + newRecipe.getTitle() + "\n";
         
         for(int i = 0;i<curIngredient.size();i++) {
@@ -266,8 +260,16 @@ public class AddRecipe{
         recipeInfoTest += "Instructions: \n" + newRecipe.getInstructions() + "\n";
         recipeInfoTest += "Main Ingredient: " + newRecipe.getMainIngredient() + "\n";
         recipeInfoTest += "Category: " + newRecipe.getCategory() + "\n";
+        */
+        recipeTitle.setText("");
+        ingredient.setText("");
+        amount.setText("");
+        listIngredients.setText("");
+        recipeInstructions.setText("");
+        mealCatagory.setSelectedIndex(0);
+        mainIngredient.setSelectedIndex(0);
         
-        JOptionPane.showMessageDialog(null,recipeInfoTest);
+        //JOptionPane.showMessageDialog(null,recipeInfoTest);
     }//GEN-LAST:event_addAllActionPerformed
 
     private void addIngredientActionPerformed(MouseEvent evt) {//GEN-FIRST:event_addIngredientActionPerformed
@@ -275,7 +277,7 @@ public class AddRecipe{
         String ing, amnt, total, newline;
         ing = ingredient.getText();
         amnt = amount.getText();
-        total = ("1. " + ing + " - " + amnt);
+        total = (count++ + ". " + ing + " - " + amnt);
         newline = "\n";
         
         listIngredients.append(total + newline);

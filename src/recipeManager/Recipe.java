@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class Recipe {
+import java.io.IOException;
+import java.io.Serializable;
+
+public class Recipe implements Serializable
+{
 
 	private String title;
 	private ArrayList<String> ingredients = new ArrayList<String>();
@@ -17,10 +21,6 @@ public class Recipe {
 	private ArrayList<String> votes = new ArrayList<String>();
 	private ImageIcon image;
 	
-	public Recipe()
-	{
-		
-	}
 	
 	public void setTitle(String setTitle) {
 		title = setTitle;		
@@ -61,6 +61,25 @@ public class Recipe {
 	}
 	public String getMainIngredient() {
 		return mainIngredient;
+	}
+	
+	public static void writeToFile(ArrayList<Recipe> recipeList) throws ClassNotFoundException {
+		try
+		{
+			WriteOut.writeData("recipes", recipeList);
+		}catch(IOException e)
+		{
+			
+		}
+		
+		
+	}
+	
+	public static ArrayList<Recipe> readFromFile() throws IOException, ClassNotFoundException {
+		ArrayList<Recipe> tempRecipeList = new ArrayList<Recipe>();
+		tempRecipeList = ReadIn.readData("recipes");
+		
+		return tempRecipeList;
 	}
 	
 	public void setComments(String[][] setComments) {

@@ -1,15 +1,21 @@
 package recipeManager;
 
 import java.io.*;
+import java.util.*;
 
 public class WriteOut
 {
-    private static ObjectOutputStream output;
+    private static OutputStream file;
+    private static OutputStream buffer;
+    private static ObjectOutput output;
 
-    public static void writeData(String dataName, Object theData) throws ClassNotFoundException, IOException
+    public static void writeData(String dataName, ArrayList<Recipe> theData) throws ClassNotFoundException, IOException
     {
-        output = new ObjectOutputStream(new FileOutputStream(dataName+".dat"));
-        output.writeObject(theData);
-        output.close();
+    	 file = new FileOutputStream(dataName+".dat");
+    	 buffer = new BufferedOutputStream(file);
+    	 output = new ObjectOutputStream(buffer);
+    	 output.writeObject(theData);
+    	 output.flush();
+    	 output.close();
     }
 }

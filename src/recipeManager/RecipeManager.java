@@ -2,10 +2,12 @@ package recipeManager;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
+import java.util.*;
 
 public class RecipeManager {
 	private JFrame frame;
@@ -13,10 +15,10 @@ public class RecipeManager {
 	private int stage = 1;
 	
 	/*actual panel to add*/
-	JPanel selectRecipe;
-	JPanel viewRecipies;
-	JPanel editIngredients;
-	JPanel addRecipe;
+	private JPanel selectRecipe;
+	private JPanel viewRecipies;
+	private JPanel editIngredients;
+	private JPanel addRecipe;
 	
 	/*button images*/
 	private JLabel closeLabel;
@@ -30,17 +32,31 @@ public class RecipeManager {
 	private Color bgColor = new Color(255, 255, 255);
 	
 	/*classes which contain the panels for each and their names*/
-	EditIngredients editIngredientsPanel;
-	ViewRecipies viewRecipiesPanel;
-	SelectRecipe selectRecipePanel;
-	AddRecipe addRecipePanel;
+	private EditIngredients editIngredientsPanel;
+	private ViewRecipies viewRecipiesPanel;
+	private SelectRecipe selectRecipePanel;
+	private AddRecipe addRecipePanel;
+	
+	private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		
+	private boolean bool = true;
 	public RecipeManager() {
 		createWindow();
 	}
 		
 	public void createWindow() {
-			 
+		
+		try{
+			recipes = Recipe.readFromFile();
+		}catch(IOException e){
+			if(recipes == null)
+				bool = false;
+		}
+		catch(ClassNotFoundException e)
+		{
+			
+		}
+		
 		//Create and set up the window. 
 		frame = new JFrame("Recipe Manager");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,7 +104,10 @@ public class RecipeManager {
 			frame.add(closeLabel, c);			       
 			
 			/*add recipe selection panel to the frame*/
+			//if(bool != false)
+			selectRecipePanel.addSelectedRecipesToPanel(recipes);
 			selectRecipe = selectRecipePanel.setSelectRecipePanelDimensions();
+			
 			c.fill = GridBagConstraints.HORIZONTAL;		
 			c.gridwidth = 1;
 			c.gridx = 0;
@@ -101,6 +120,7 @@ public class RecipeManager {
 			c.gridy = 1;
 			frame.add(viewRecipies, c);
 			/*refresh the panels and frame and place the layout*/
+			frame.validate();
 			frame.getContentPane().doLayout();
 		}
 		
@@ -172,6 +192,7 @@ public class RecipeManager {
 			c.gridy = 1;
 			frame.add(addRecipe, c);
 			//refresh the panels and frame and place the layout
+			addRecipeListener();
 			frame.getContentPane().doLayout();
 		}
 	
@@ -236,7 +257,26 @@ public class RecipeManager {
 			}
 		});
 		
-	}	
+	}
+	
+	private void addRecipeListener() {
+		addRecipePanel.addRecipeLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				stage = 3;
+				recipes.add(addRecipePanel.getNewRecipe());
+				try {
+					Recipe.writeToFile(recipes);
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				frame.getContentPane().removeAll();
+				frame.validate();
+				frame.repaint();
+				setPanelStage(stage);
+			}
+		});		
+	}
 		
 	public JPanel createRectPanel (int x, int y) {
 	
