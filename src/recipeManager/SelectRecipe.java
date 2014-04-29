@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -20,13 +22,13 @@ public class SelectRecipe {
 	
 	private JPanel selectRecipePanel;
 	private JPanel insidePanel;	
-	
+	private ArrayList<JLabel> currentLabels = new ArrayList<JLabel>();
 	private int gBRows;		
 	private GridBagLayout gbl = new GridBagLayout();
 	private GridBagConstraints gbc = new GridBagConstraints();
 	
 	private Color bgColor = new Color(255, 255, 255);
-	private ArrayList<JLabel> recipeLabels = new ArrayList<JLabel>();
+	
 	
 	public JPanel getSelectRecipePanel() {
 		
@@ -51,19 +53,19 @@ public class SelectRecipe {
 	}
 	//adds the selected recipes to the selection panel
 	public void addSelectedRecipesToPanel(ArrayList<Recipe> selectedRecipes) {		
-		gBRows = 0;
-		
-		for(int i = 0; i < selectedRecipes.size(); i++) {
-			recipeLabels.add(new JLabel("<html>" + selectedRecipes.get(i).getTitle() + "</html>"));
-			recipeLabels.get(i).setOpaque(true);
-			recipeLabels.get(i).setForeground(Color.BLACK);
-			recipeLabels.get(i).setBackground(Color.BLACK);
-			recipeLabels.get(i).setPreferredSize(new Dimension(185, 50));
-			recipeLabels.get(i).setMaximumSize(new Dimension(185, 50));
+		for(int i = 0; i <selectedRecipes.size();i++) {
+			currentLabels.add(new JLabel());
 		}
-		for(int i = 0; i < recipeLabels.size(); i++) {						
-			insidePanel.add(recipeLabels.get(i));
-			
+		
+		for(int i = 0; i < currentLabels.size(); i++) {
+			currentLabels.get(i).setText("<html>" + selectedRecipes.get(i).getTitle() + "</html>");
+			currentLabels.get(i).setOpaque(true);			
+			currentLabels.get(i).setPreferredSize(new Dimension(185, 50));
+			currentLabels.get(i).setMaximumSize(new Dimension(185, 50));
+		}
+		for(int i = 0; i < currentLabels.size(); i++) {						
+			insidePanel.add(currentLabels.get(i));
+			recipeMouseover(i);
 		}
 		
 		insidePanel.validate();
@@ -78,8 +80,33 @@ public class SelectRecipe {
 		return selectRecipePanel;
 	}
 	
-	public void recipeMouseover() {
+	public void recipeMouseover(final int i) {		
+					
+			currentLabels.get(i).addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					currentLabels.get(i).setBackground(new Color(0, 153, 204));
+					currentLabels.get(i).setForeground(Color.white);					
+				}
+			});
+				
+			currentLabels.get(i).addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseExited(MouseEvent e) {
+					currentLabels.get(i).setBackground(Color.white);
+					currentLabels.get(i).setForeground(Color.black);
+				}
+			});
+		}
+				
+			/*addIngredientLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					addIngredientActionPerformed(e);
+				}
+			});*/			
 		
-	}
+		
+	
 	
 }
