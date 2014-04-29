@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -26,18 +27,16 @@ public class SelectRecipe {
 	}
 	
 	public void addSelectedRecipesToPanel(ArrayList<Recipe> selectedRecipes) {
-		/*for(int i = 0; i < selectedRecipes.size(); i++) {
-			recipeLabels.add(new JLabel());
-			Recipe curRecipe = selectedRecipes.get(i);
-			String titleText = (String)curRecipe.getTitle();
-			recipeLabels.get(i).setText(titleText);
-		}/*
+		for(int i = 0; i < selectedRecipes.size(); i++) {
+			recipeLabels.add(new JLabel(selectedRecipes.get(i).getTitle()));
+		}
 		for(int i = 0; i < recipeLabels.size(); i++) {
+			recipeLabels.get(i).setSize(new Dimension(80, 100));
+			recipeLabels.get(i).setPreferredSize(new Dimension(100, 50));
+			recipeLabels.get(i).setBorder(BorderFactory.createLineBorder(Color.blue));
 			selectRecipePanel.add(recipeLabels.get(i));
-		}*/
-		Recipe curR = selectedRecipes.get(0);
-		String curS = curR.getTitle();
-		selectRecipePanel.add(new JLabel(curS));
+		}
+		selectRecipePanel.validate();
 	}
 	
 	public JPanel setSelectRecipePanelDimensions() {
