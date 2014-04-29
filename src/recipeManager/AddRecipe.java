@@ -100,8 +100,9 @@ public class AddRecipe{
         jLabel1.setText("Recipe Title:");
 
         jLabel4.setText("Recipe Instructions:");
-
-        recipeInstructions.setColumns(10);
+        
+        recipeInstructions.setSize(new Dimension(100,300));
+        recipeInstructions.setColumns(5);
         recipeInstructions.setRows(5);
         recipeInstructions.setLineWrap(true);
         recipeInstructions.setWrapStyleWord(true);
