@@ -101,10 +101,11 @@ public class AddRecipe{
 
         jLabel4.setText("Recipe Instructions:");
 
-        recipeInstructions.setColumns(20);
+        recipeInstructions.setColumns(10);
         recipeInstructions.setRows(5);
-        recipeInstructions.setEditable(true);
-        jScrollPane1.setViewportView(recipeInstructions);
+        recipeInstructions.setLineWrap(true);
+        recipeInstructions.setWrapStyleWord(true);
+        recipeInstructions.setBorder(BorderFactory.createLineBorder(Color.black));
         
         
         mainIngredient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Meat", "Dairy", "Sweets", "Bread" }));
@@ -128,7 +129,7 @@ public class AddRecipe{
                 .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panCreateLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(recipeInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panCreateLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -187,7 +188,7 @@ public class AddRecipe{
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(recipeInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panCreateLayout.createSequentialGroup()
                         .addGroup(panCreateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -222,6 +223,7 @@ public class AddRecipe{
         actualPanel.setBorder(new TitledBorder("Add Recipe"));
         actualPanel.validate();
         actualPanel.doLayout();
+
        
     }// </editor-fold>//GEN-END:initComponents
 
