@@ -21,10 +21,10 @@ public class ViewRecipies {
 		}
 		
 		public JPanel setViewRecipiesPanelDimensions() {
-			viewRecipiesPanel.setSize(new Dimension(480,670));
-			viewRecipiesPanel.setMinimumSize(new Dimension(480,670));
-			viewRecipiesPanel.setMaximumSize(new Dimension(480,670));
-			viewRecipiesPanel.setPreferredSize(new Dimension(480,670));
+			viewRecipiesPanel.setSize(new Dimension(600,670));
+			viewRecipiesPanel.setMinimumSize(new Dimension(600,670));
+			viewRecipiesPanel.setMaximumSize(new Dimension(600,670));
+			viewRecipiesPanel.setPreferredSize(new Dimension(600,670));
 			return viewRecipiesPanel;
 		}
 		

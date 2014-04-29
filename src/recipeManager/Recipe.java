@@ -1,22 +1,23 @@
 package recipeManager;
 
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class Recipe {
 
 	private String title;
-	private String mainIngredient;
-	private String[][][] ingredients;
+	private String[][] ingredients;
 	private String[][] alternativeIngredients;
 	private String instructions;
 	private String prepTime;
 	private String category;
 	private String[] subCategory;
 	private String[][] comments;
-	private Ranking ranking;
+	private ArrayList votes = new ArrayList();
 	private ImageIcon[] image;
 	
-	public Recipe(String newTitle, String newMainIngredient, String[][][] newIngredients, String[][] newAlternativeIngredients,
+	public Recipe(String newTitle, String[][] newIngredients, String[][] newAlternativeIngredients,
 					String newInstructions, String newPrepTime, String newCategory, String[] newSubCategory, ImageIcon[] newImage) {
 		
 	}
@@ -25,11 +26,7 @@ public class Recipe {
 		title = setTitle;		
 	}
 	
-	public void setMainIngredient(String setMainIngredient) {
-		mainIngredient = setMainIngredient;
-	}
-	
-	public void setIngredients(String[][][] setIngredients) {
+	public void setIngredients(String[][] setIngredients) {
 		
 	}
 	
@@ -56,10 +53,7 @@ public class Recipe {
 	public void setComments(String[][] setComments) {
 		
 	}
-	
-	public void setRanking(Ranking setRanking) {
-		ranking = setRanking;
-	}
+
 	
 	public void setImage(ImageIcon[] setImage) {
 		
