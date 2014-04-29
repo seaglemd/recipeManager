@@ -251,16 +251,7 @@ public class AddRecipe{
         newRecipe.setInstructions(recipeInstructions.getText());
         newRecipe.setCategory(categoryArray[mealCatagory.getSelectedIndex()]);
         newRecipe.setMainIngredient(mainIngredientArray[mainIngredient.getSelectedIndex()]);
-        /*
-        String recipeInfoTest = "You have added a recipe! \n" + newRecipe.getTitle() + "\n";
-        
-        for(int i = 0;i<curIngredient.size();i++) {
-        	recipeInfoTest += newRecipe.getIngredient(i) + " " + newRecipe.getAmount(i) + "\n";
-        }
-        recipeInfoTest += "Instructions: \n" + newRecipe.getInstructions() + "\n";
-        recipeInfoTest += "Main Ingredient: " + newRecipe.getMainIngredient() + "\n";
-        recipeInfoTest += "Category: " + newRecipe.getCategory() + "\n";
-        */
+   
         recipeTitle.setText("");
         ingredient.setText("");
         amount.setText("");
@@ -268,8 +259,7 @@ public class AddRecipe{
         recipeInstructions.setText("");
         mealCatagory.setSelectedIndex(0);
         mainIngredient.setSelectedIndex(0);
-        
-        //JOptionPane.showMessageDialog(null,recipeInfoTest);
+       
     }//GEN-LAST:event_addAllActionPerformed
 
     private void addIngredientActionPerformed(MouseEvent evt) {//GEN-FIRST:event_addIngredientActionPerformed

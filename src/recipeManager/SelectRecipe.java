@@ -3,6 +3,7 @@ package recipeManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -33,8 +34,10 @@ public class SelectRecipe {
 		insidePanel = new JPanel();
 		selectRecipePanel.setLayout(new BorderLayout());
 		selectRecipePanel.setPreferredSize(new Dimension(200, 670));		
-				
-		insidePanel.setBorder(BorderFactory.createLineBorder(Color.blue));		
+		
+		insidePanel.setBackground(bgColor);		
+		insidePanel.setLayout(new FlowLayout());
+		insidePanel.setPreferredSize(new Dimension(195,650));
 		
 		selectRecipePanel.setBackground(bgColor);
 		selectRecipePanel.setBorder(new TitledBorder("Meals"));
@@ -49,19 +52,20 @@ public class SelectRecipe {
 	//adds the selected recipes to the selection panel
 	public void addSelectedRecipesToPanel(ArrayList<Recipe> selectedRecipes) {		
 		gBRows = 0;
-		insidePanel.setLayout(new GridLayout(selectedRecipes.size(),1));
+		
 		for(int i = 0; i < selectedRecipes.size(); i++) {
-			recipeLabels.add(new JLabel(selectedRecipes.get(i).getTitle()));
+			recipeLabels.add(new JLabel("<html>" + selectedRecipes.get(i).getTitle() + "</html>"));
+			recipeLabels.get(i).setOpaque(true);
+			recipeLabels.get(i).setForeground(Color.BLACK);
+			recipeLabels.get(i).setBackground(Color.BLACK);
+			recipeLabels.get(i).setPreferredSize(new Dimension(185, 50));
+			recipeLabels.get(i).setMaximumSize(new Dimension(185, 50));
 		}
-		for(int i = 0; i < recipeLabels.size(); i++) {		
-			
-			recipeLabels.get(i).setPreferredSize(new Dimension(100, 100));
-			//recipeLabels.get(i).setBorder(BorderFactory.createLineBorder(Color.blue));			
+		for(int i = 0; i < recipeLabels.size(); i++) {						
 			insidePanel.add(recipeLabels.get(i));
-			gBRows++;
-			gbc.gridy = gBRows;
+			
 		}
-		//insidePanel.setPreferredSize(insidePanel.getPreferredSize());
+		
 		insidePanel.validate();
 		selectRecipePanel.validate();
 	}
@@ -73,4 +77,9 @@ public class SelectRecipe {
 		selectRecipePanel.setPreferredSize(new Dimension(200, 670));
 		return selectRecipePanel;
 	}
+	
+	public void recipeMouseover() {
+		
+	}
+	
 }
