@@ -7,47 +7,60 @@ import javax.swing.*;
 public class Recipe {
 
 	private String title;
-	private String[][] ingredients;
-	private String[][] alternativeIngredients;
+	private ArrayList<String> ingredients = new ArrayList<String>();
+	private ArrayList<String> amount = new ArrayList<String>();
 	private String instructions;
-	private String prepTime;
 	private String category;
-	private String[] subCategory;
-	private String[][] comments;
-	private ArrayList votes = new ArrayList();
-	private ImageIcon[] image;
+	private String mainIngredient;
+
+	private ArrayList<String> comments = new ArrayList<String>();
+	private ArrayList<String> votes = new ArrayList<String>();
+	private ImageIcon image;
 	
-	public Recipe(String newTitle, String[][] newIngredients, String[][] newAlternativeIngredients,
-					String newInstructions, String newPrepTime, String newCategory, String[] newSubCategory, ImageIcon[] newImage) {
+	public Recipe()
+	{
 		
 	}
 	
 	public void setTitle(String setTitle) {
 		title = setTitle;		
 	}
-	
-	public void setIngredients(String[][] setIngredients) {
-		
+	public String getTitle() {
+		return title;
 	}
 	
-	public void setAlternativeIngredients(String [][] setAlternativeIngredients) {
-		
+	public void setIngredients(String setIngredient) {
+		ingredients.add(setIngredient);
+	}
+	public void setAmount(String setAmount) {
+		amount.add(setAmount);
+	}
+	public String getIngredient(int i) {
+		return ingredients.get(i);
+	}
+	
+	public String getAmount(int i) {
+		return amount.get(i);
 	}
 	
 	public void setInstructions(String setInstructions) {
 		instructions = setInstructions;		
 	}
-	
-	public void setPrepTime(String setPrepTime) {
-		prepTime = setPrepTime;
+	public String getInstructions() {
+		return instructions;
 	}
 	
-	public void setCategory(String[] setCategory) {
-		
+	public void setCategory(String setCategory) {
+		category = setCategory;
 	}
-	
-	public void setSubCategory(String[] setSubCategory) {
-		
+	public String getCategory() {
+		return category;
+	}
+	public void setMainIngredient(String setMainIngredient) {
+		mainIngredient = setMainIngredient;
+	}
+	public String getMainIngredient() {
+		return mainIngredient;
 	}
 	
 	public void setComments(String[][] setComments) {

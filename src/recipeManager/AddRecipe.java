@@ -11,13 +11,20 @@ import javax.swing.border.TitledBorder;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 /**
  *
  * @author Andy Smith
  */
 public class AddRecipe{
+	
+	private ArrayList<String> curIngredient = new ArrayList<String>();
+	private ArrayList<String> curAmount = new ArrayList<String>();
+	private String[] categoryArray;
+	private String[] mainIngredientArray;
 
+	private Recipe newRecipe;
 	private JLabel addIngredientLabel;
 	private JLabel addRecipeLabel;
 	private ImageIcon addIngredientIcon;
@@ -108,10 +115,12 @@ public class AddRecipe{
         recipeInstructions.setWrapStyleWord(true);
         recipeInstructions.setBorder(BorderFactory.createLineBorder(Color.black));
         
+        categoryArray = new String[] { "Select", "Breakfast", "Lunch", "Dinner", "Dessert" };
+        mainIngredientArray = new String[] { "Select", "Meat", "Dairy", "Sweets", "Bread" };
         
-        mainIngredient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Meat", "Dairy", "Sweets", "Bread" }));
+        mainIngredient.setModel(new javax.swing.DefaultComboBoxModel(mainIngredientArray));
 
-        mealCatagory.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Breakfast", "Lunch", "Dinner", "Dessert" }));
+        mealCatagory.setModel(new javax.swing.DefaultComboBoxModel(categoryArray));
 
         jLabel5.setText("Main Ingredient");
 
@@ -217,6 +226,7 @@ public class AddRecipe{
                 .addComponent(panCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 22, Short.MAX_VALUE))
         );
+        listIngredients.setEditable(false);
         panCreate.setSize(new Dimension(480,670));
         panCreate.validate();
         panCreate.doLayout();
@@ -230,17 +240,34 @@ public class AddRecipe{
 
     private void addRecipeActionPerformed(MouseEvent evt) {//GEN-FIRST:event_addAllActionPerformed
         
+        newRecipe = new Recipe();
+        newRecipe.setTitle(recipeTitle.getText());
+        for(int i = 0;i<curIngredient.size();i++){
+        	newRecipe.setIngredients(curIngredient.get(i));
+        	newRecipe.setAmount(curAmount.get(i));
+        }
         
-        
-        recipeTitle.setText(" ");
-        ingredient.setText(" ");
-        amount.setText(" ");
-        listIngredients.setText(" ");
-        recipeInstructions.setText(" ");
+        newRecipe.setInstructions(recipeInstructions.getText());
+        newRecipe.setCategory(categoryArray[mealCatagory.getSelectedIndex()]);
+        newRecipe.setMainIngredient(mainIngredientArray[mainIngredient.getSelectedIndex()]);
+        recipeTitle.setText("");
+        ingredient.setText("");
+        amount.setText("");
+        listIngredients.setText("");
+        recipeInstructions.setText("");
         mealCatagory.setSelectedIndex(0);
         mainIngredient.setSelectedIndex(0);
         
-        JOptionPane.showMessageDialog(null,"You have added a Recipe!");
+        String recipeInfoTest = "You have added a recipe! \n" + newRecipe.getTitle() + "\n";
+        
+        for(int i = 0;i<curIngredient.size();i++) {
+        	recipeInfoTest += newRecipe.getIngredient(i) + " " + newRecipe.getAmount(i) + "\n";
+        }
+        recipeInfoTest += "Instructions: \n" + newRecipe.getInstructions() + "\n";
+        recipeInfoTest += "Main Ingredient: " + newRecipe.getMainIngredient() + "\n";
+        recipeInfoTest += "Category: " + newRecipe.getCategory() + "\n";
+        
+        JOptionPane.showMessageDialog(null,recipeInfoTest);
     }//GEN-LAST:event_addAllActionPerformed
 
     private void addIngredientActionPerformed(MouseEvent evt) {//GEN-FIRST:event_addIngredientActionPerformed
@@ -248,13 +275,14 @@ public class AddRecipe{
         String ing, amnt, total, newline;
         ing = ingredient.getText();
         amnt = amount.getText();
-        total = (ing + " " + amnt);
+        total = ("1. " + ing + " - " + amnt);
         newline = "\n";
         
         listIngredients.append(total + newline);
-        
-        ingredient.setText(" ");
-        amount.setText(" ");
+        curIngredient.add(ing);
+        curAmount.add(amnt);
+        ingredient.setText("");
+        amount.setText("");
         
     }//GEN-LAST:event_addIngredientActionPerformed
     
@@ -268,6 +296,11 @@ public class AddRecipe{
         actualPanel.setSize(new Dimension(600,670));
         actualPanel.setPreferredSize(new Dimension(600,670));
         return actualPanel;
+    }
+    
+    public Recipe getNewRecipe()
+    {
+    	return newRecipe;
     }
     
     private void addIngredientButton()
