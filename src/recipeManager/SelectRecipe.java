@@ -22,7 +22,7 @@ public class SelectRecipe {
 	
 	private JPanel selectRecipePanel;
 	private JPanel insidePanel;	
-	private ArrayList<JLabel> currentLabels = new ArrayList<JLabel>();
+	protected ArrayList<JLabel> currentLabels = new ArrayList<JLabel>();
 	private int gBRows;		
 	private GridBagLayout gbl = new GridBagLayout();
 	private GridBagConstraints gbc = new GridBagConstraints();
@@ -97,14 +97,15 @@ public class SelectRecipe {
 					currentLabels.get(i).setForeground(Color.black);
 				}
 			});
+			currentLabels.get(i).addMouseListener(new MouseAdapter() {
+				//@Override
+				/*public void mouseClicked(MouseEvent e) {
+					
+				}*/
+			});			
 		}
 				
-			/*addIngredientLabel.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					addIngredientActionPerformed(e);
-				}
-			});*/			
+			
 		
 		
 	
