@@ -305,6 +305,10 @@ public class RecipeManager {
 		selectRecipePanel.currentLabels.get(i).addMouseListener(new MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent e) {
+				
+				viewRecipiesPanel.emptyPanel();
+				viewRecipies.validate();
+				viewRecipies.repaint();
 				viewRecipiesPanel.viewRecipe(selectRecipePanel.currentRecipes.get(i));
 			}
 		});

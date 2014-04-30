@@ -10,6 +10,13 @@ import javax.swing.border.TitledBorder;
 
 public class ViewRecipies {
 	
+		private JLabel title;
+		private JLabel category;
+		private JLabel mainIngredient;
+		private String ingredients;
+		private JLabel ingredientLabel;
+		private JLabel instructions;
+	
 		private JPanel viewRecipiesPanel;
 		private Color bgColor = new Color(255, 255, 255);
 		
@@ -20,21 +27,32 @@ public class ViewRecipies {
 			viewRecipiesPanel.setBorder(new TitledBorder("View Recipes"));
 			return viewRecipiesPanel;
 		}
-		
+		public void emptyPanel() {
+			if(viewRecipiesPanel.getComponentCount() > 0) {
+			viewRecipiesPanel.remove(title);
+			viewRecipiesPanel.remove(category);
+			viewRecipiesPanel.remove(mainIngredient);
+			viewRecipiesPanel.remove(ingredientLabel);
+			viewRecipiesPanel.remove(instructions);
+			viewRecipiesPanel.validate();
+			viewRecipiesPanel.repaint();
+			}
+		}
 		public void viewRecipe(Recipe viewRecipe) {
-			JLabel title = new JLabel(viewRecipe.getTitle());
-			JLabel category = new JLabel(viewRecipe.getCategory());
-			JLabel mainIngredient = new JLabel(viewRecipe.getMainIngredient());
-			String ingredients = "";
+			title = new JLabel(viewRecipe.getTitle());
+			category = new JLabel(viewRecipe.getCategory());
+			mainIngredient = new JLabel(viewRecipe.getMainIngredient());
+			ingredients = "";
 			for(int i = 0; i < viewRecipe.getIngredientNumber(); i++) {
 				ingredients += viewRecipe.getIngredient(i) + " " + viewRecipe.getAmount(i) + "\n";
 			}
-			JLabel ingredientLabel = new JLabel(ingredients);
-			JLabel instructions = new JLabel(viewRecipe.getInstructions());
+			ingredientLabel = new JLabel(ingredients);
+			instructions = new JLabel(viewRecipe.getInstructions());
 			
 			viewRecipiesPanel.add(title);
 			viewRecipiesPanel.add(category);
 			viewRecipiesPanel.add(mainIngredient);
+			viewRecipiesPanel.add(ingredientLabel);
 			viewRecipiesPanel.add(instructions);
 			viewRecipiesPanel.validate();
 		}
