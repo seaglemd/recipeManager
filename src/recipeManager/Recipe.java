@@ -16,7 +16,7 @@ public class Recipe implements Serializable
 	private String instructions;
 	private String category;
 	private String mainIngredient;
-
+	
 	private ArrayList<String> comments = new ArrayList<String>();
 	private ArrayList<String> votes = new ArrayList<String>();
 	private ImageIcon image;
@@ -89,5 +89,9 @@ public class Recipe implements Serializable
 	
 	public void setImage(ImageIcon[] setImage) {
 		
+	}
+	
+	public int getIngredientNumber(){
+		return ingredients.size();
 	}
 }

@@ -23,6 +23,7 @@ public class SelectRecipe {
 	private JPanel selectRecipePanel;
 	private JPanel insidePanel;	
 	protected ArrayList<JLabel> currentLabels = new ArrayList<JLabel>();
+	protected ArrayList<Recipe> currentRecipes;
 	private int gBRows;		
 	private GridBagLayout gbl = new GridBagLayout();
 	private GridBagConstraints gbc = new GridBagConstraints();
@@ -52,7 +53,8 @@ public class SelectRecipe {
 		
 	}
 	//adds the selected recipes to the selection panel
-	public void addSelectedRecipesToPanel(ArrayList<Recipe> selectedRecipes) {		
+	public void addSelectedRecipesToPanel(ArrayList<Recipe> selectedRecipes) {
+		currentRecipes = selectedRecipes;
 		for(int i = 0; i <selectedRecipes.size();i++) {
 			currentLabels.add(new JLabel());
 		}
@@ -65,7 +67,6 @@ public class SelectRecipe {
 		}
 		for(int i = 0; i < currentLabels.size(); i++) {						
 			insidePanel.add(currentLabels.get(i));
-			recipeMouseover(i);
 		}
 		
 		insidePanel.validate();
@@ -79,35 +80,5 @@ public class SelectRecipe {
 		selectRecipePanel.setPreferredSize(new Dimension(200, 670));
 		return selectRecipePanel;
 	}
-	
-	public void recipeMouseover(final int i) {		
-					
-			currentLabels.get(i).addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					currentLabels.get(i).setBackground(new Color(0, 153, 204));
-					currentLabels.get(i).setForeground(Color.white);					
-				}
-			});
-				
-			currentLabels.get(i).addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseExited(MouseEvent e) {
-					currentLabels.get(i).setBackground(Color.white);
-					currentLabels.get(i).setForeground(Color.black);
-				}
-			});
-			currentLabels.get(i).addMouseListener(new MouseAdapter() {
-				//@Override
-				/*public void mouseClicked(MouseEvent e) {
-					
-				}*/
-			});			
-		}
-				
-			
-		
-		
-	
 	
 }

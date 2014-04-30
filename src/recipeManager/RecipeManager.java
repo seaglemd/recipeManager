@@ -106,6 +106,7 @@ public class RecipeManager {
 			/*add recipe selection panel to the frame*/
 			//if(bool != false)
 			selectRecipePanel.addSelectedRecipesToPanel(recipes);
+			addListenerLoop();
 			selectRecipe = selectRecipePanel.setSelectRecipePanelDimensions();
 			
 			c.fill = GridBagConstraints.HORIZONTAL;
@@ -277,6 +278,36 @@ public class RecipeManager {
 				setPanelStage(stage);
 			}
 		});		
+	}
+	
+	private void addListenerLoop() {
+		for(int i = 0;i < selectRecipePanel.currentLabels.size();i++) {
+			addViewRecipeListener(i);
+		}
+	}
+	
+	private void addViewRecipeListener(final int i) {
+		selectRecipePanel.currentLabels.get(i).addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				selectRecipePanel.currentLabels.get(i).setBackground(new Color(0, 153, 204));
+				selectRecipePanel.currentLabels.get(i).setForeground(Color.white);					
+			}
+		});
+			
+		selectRecipePanel.currentLabels.get(i).addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				selectRecipePanel.currentLabels.get(i).setBackground(Color.white);
+				selectRecipePanel.currentLabels.get(i).setForeground(Color.black);
+			}
+		});
+		selectRecipePanel.currentLabels.get(i).addMouseListener(new MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent e) {
+				viewRecipiesPanel.viewRecipe(selectRecipePanel.currentRecipes.get(i));
+			}
+		});
 	}
 		
 	public JPanel createRectPanel (int x, int y) {
