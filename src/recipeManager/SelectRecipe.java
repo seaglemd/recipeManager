@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -22,6 +23,13 @@ public class SelectRecipe {
 	
 	private JPanel selectRecipePanel;
 	private JPanel insidePanel;	
+	private JPanel insideSearchPanel;
+	
+	private ImageIcon goIcon;
+	private ImageIcon goIconO;
+	
+	private JTextField searchCriteria;
+	private JLabel goButton;
 	protected ArrayList<JLabel> currentLabels = new ArrayList<JLabel>();
 	protected ArrayList<Recipe> currentRecipes = new ArrayList<Recipe>();
 	private int gBRows;		
@@ -32,19 +40,26 @@ public class SelectRecipe {
 	
 	
 	public JPanel getSelectRecipePanel() {
-		
+		addGoButtonActionListener();
+		searchCriteria = new JTextField();
+		searchCriteria.setColumns(10);
 		selectRecipePanel = new JPanel();
 		insidePanel = new JPanel();
-		selectRecipePanel.setLayout(new BorderLayout());
+		insideSearchPanel = new JPanel();
+		insideSearchPanel.setBackground(bgColor);
+		insideSearchPanel.add(searchCriteria);
+		insideSearchPanel.add(goButton);
+		selectRecipePanel.setLayout(new FlowLayout());
 		selectRecipePanel.setPreferredSize(new Dimension(200, 670));		
 		
 		insidePanel.setBackground(bgColor);		
 		insidePanel.setLayout(new FlowLayout());
-		insidePanel.setPreferredSize(new Dimension(195,650));
+		insidePanel.setPreferredSize(new Dimension(190,650));
 		
 		selectRecipePanel.setBackground(bgColor);
 		selectRecipePanel.setBorder(new TitledBorder("Meals"));
-		selectRecipePanel.add(insidePanel, BorderLayout.PAGE_START);
+		selectRecipePanel.add(insideSearchPanel);
+		selectRecipePanel.add(insidePanel);
 		
 		insidePanel.validate();		
 		selectRecipePanel.validate();
@@ -69,8 +84,8 @@ public class SelectRecipe {
 		for(int i = 0; i < currentRecipes.size(); i++) {
 			currentLabels.get(i).setText("<html>" + currentRecipes.get(i).getTitle() + "</html>");
 			currentLabels.get(i).setOpaque(true);			
-			currentLabels.get(i).setPreferredSize(new Dimension(185, 50));
-			currentLabels.get(i).setMaximumSize(new Dimension(185, 50));
+			currentLabels.get(i).setPreferredSize(new Dimension(185, 48));
+			currentLabels.get(i).setMaximumSize(new Dimension(185, 48));
 		}
 		if(insidePanel.getComponentCount() > 0) {
 			insidePanel.removeAll();
@@ -90,6 +105,34 @@ public class SelectRecipe {
 		selectRecipePanel.setMaximumSize(new Dimension(200, 670));
 		selectRecipePanel.setPreferredSize(new Dimension(200, 670));
 		return selectRecipePanel;
+	}
+	
+	public void addGoButtonActionListener() {
+		goIcon = new ImageIcon("src/go.gif");
+		goIconO = new ImageIcon("src/goO.gif");
+		goButton = new JLabel(goIcon);		
+			
+		goButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				goButton.setIcon(goIconO);			
+			}
+		});
+			
+		goButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				goButton.setIcon(goIcon);
+			}
+		});
+			
+		/*closeLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.dispose();
+			}
+		});*/
+
 	}
 	
 }
