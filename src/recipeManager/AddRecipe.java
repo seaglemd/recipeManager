@@ -41,10 +41,14 @@ public class AddRecipe{
     private JLabel jLabel5;
     private JLabel jLabel6;
     private JLabel jLabel7;
+    private JLabel jLabel8;
+    private JLabel jLabel9;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
     private JTextArea listIngredients;
     private JTextField imagePath;
+    private JTextArea alternateIngredientsInstructions;
+    private JTextField prepTimeField;
     private JComboBox mainIngredient;
     private JComboBox mealCatagory;
     private JPanel actualPanel;
@@ -53,6 +57,7 @@ public class AddRecipe{
     private JTextField recipeTitle;
     private Color bgColor = new Color(255, 255, 255);
     private int count;
+    protected boolean create;
     /**
      * Creates new form NewJFrame
      */
@@ -69,13 +74,21 @@ public class AddRecipe{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
     	count = 1;
+    	create = true;
         panCreate = new JPanel();
         amount = new JTextField();
         jLabel3 = new JLabel();
         recipeTitle = new JTextField();
-
+        alternateIngredientsInstructions = new JTextArea();
+        alternateIngredientsInstructions.setSize(new Dimension(100,300));
+        alternateIngredientsInstructions.setColumns(5);
+        alternateIngredientsInstructions.setRows(5);
+        alternateIngredientsInstructions.setLineWrap(true);
+        alternateIngredientsInstructions.setWrapStyleWord(true);
+        alternateIngredientsInstructions.setBorder(BorderFactory.createLineBorder(Color.black));
         ingredient = new javax.swing.JTextField();
         imagePath = new JTextField();
+        prepTimeField = new JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -86,10 +99,12 @@ public class AddRecipe{
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new JLabel();
-        
+        jLabel8 = new JLabel();
+        jLabel9 = new JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listIngredients = new javax.swing.JTextArea();
         actualPanel = new JPanel();
+        
         addIngredientIcon = new ImageIcon("src/addIngredient.gif");
         addIngredientIconO = new ImageIcon("src/addIngredientO.gif");
         addIngredientLabel = new JLabel(addIngredientIcon);
@@ -120,8 +135,8 @@ public class AddRecipe{
         recipeInstructions.setWrapStyleWord(true);
         recipeInstructions.setBorder(BorderFactory.createLineBorder(Color.black));
         
-        categoryArray = new String[] { "Select", "Breakfast", "Lunch", "Dinner", "Dessert" };
-        mainIngredientArray = new String[] { "Select", "Meat", "Dairy", "Sweets", "Bread" };
+        categoryArray = new String[] { "Select", "Breakfast", "Lunch", "Dinner", "Dessert", "Snack" };
+        mainIngredientArray = new String[] { "Select", "Beef", "Chicken", "Pork", "Dairy", "Sweets", "Bread" };
         
         mainIngredient.setModel(new DefaultComboBoxModel(mainIngredientArray));
 
@@ -133,6 +148,9 @@ public class AddRecipe{
         
         jLabel7.setText("Picture path: ");
 
+        jLabel8.setText("Alt. Ingredient Info:");
+        
+        jLabel9.setText("PrepTime: ");
 
         listIngredients.setColumns(20);
         listIngredients.setRows(5);
@@ -149,34 +167,38 @@ public class AddRecipe{
                         .addComponent(recipeInstructions, GroupLayout.PREFERRED_SIZE, 253, GroupLayout.PREFERRED_SIZE)
                         .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(panCreateLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addGap(10, 10, 10)
                                 .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                                 .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addComponent(mainIngredient, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(imagePath, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(alternateIngredientsInstructions, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(prepTimeField, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(mealCatagory, 0, 105, Short.MAX_VALUE)))
                             .addGroup(panCreateLayout.createSequentialGroup()
-                                .addGap(57, 57, 57)
+                                .addGap(25, 25, 25)
                                 .addComponent(addRecipeLabel, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(panCreateLayout.createSequentialGroup()
                         .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
+                            .addComponent(jLabel4)                            
                             .addGroup(panCreateLayout.createSequentialGroup()
                                 .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(addIngredientLabel))
-                                .addGap(18, 18, 18)
+                                .addGap(10, 10, 10)
                                 .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane2)
-                                    .addComponent(recipeTitle, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(recipeTitle, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
                                     .addGroup(panCreateLayout.createSequentialGroup()
                                         .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                            .addComponent(ingredient, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ingredient, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel2))
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -188,11 +210,11 @@ public class AddRecipe{
         panCreateLayout.setVerticalGroup(
             panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, panCreateLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(20, 20, 20)
                 .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(recipeTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(20, 20, 20)
                 .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -203,8 +225,8 @@ public class AddRecipe{
                     .addComponent(amount, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel4)
+                .addGap(20, 20, 20)                
+                .addComponent(jLabel4)                
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(recipeInstructions, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
@@ -212,15 +234,23 @@ public class AddRecipe{
                         .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(mealCatagory, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(10, 10, 10)
                         .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(mainIngredient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(10, 10, 10)
                         .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(imagePath, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(10, 10, 10)
+                        .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(alternateIngredientsInstructions, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(prepTimeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
                         .addComponent(addRecipeLabel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -254,15 +284,54 @@ public class AddRecipe{
     private void addRecipeActionPerformed(MouseEvent evt) {//GEN-FIRST:event_addAllActionPerformed
         
         newRecipe = new Recipe();
+        if(!recipeTitle.getText().isEmpty()) {
         newRecipe.setTitle(recipeTitle.getText());
-        for(int i = 0;i<curIngredient.size();i++){
-        	newRecipe.setIngredients(curIngredient.get(i));
-        	newRecipe.setAmount(curAmount.get(i));
+        }
+        else {
+        	create = false;
+        }
+        if(curIngredient.size() > 0 && curAmount.size() > 0) {
+        	for(int i = 0;i<curIngredient.size();i++){
+        		newRecipe.setIngredients(curIngredient.get(i));
+        		newRecipe.setAmount(curAmount.get(i));
+        	}
+        }
+        else {
+        	create = false;
+        }
+        if(!recipeInstructions.getText().isEmpty()) {
+        newRecipe.setInstructions(recipeInstructions.getText());
+        }
+        else {
+        	create = false;
         }
         
-        newRecipe.setInstructions(recipeInstructions.getText());
-        newRecipe.setCategory(categoryArray[mealCatagory.getSelectedIndex()]);
-        newRecipe.setMainIngredient(mainIngredientArray[mainIngredient.getSelectedIndex()]);
+        if(!(mealCatagory.getSelectedIndex() == 0)) {
+        	newRecipe.setCategory(categoryArray[mealCatagory.getSelectedIndex()]);
+        }
+        else {
+        	create = false;
+        }
+        
+        if(!(mainIngredient.getSelectedIndex() == 0)) {
+        	newRecipe.setMainIngredient(mainIngredientArray[mainIngredient.getSelectedIndex()]);
+        }
+        else {
+        	create = false;
+        }
+        if(!(alternateIngredientsInstructions.getText().isEmpty())) {
+        	newRecipe.setAlternateIngredients(alternateIngredientsInstructions.getText());
+        }
+        else {
+        	create = false;
+        }
+        if(!(prepTimeField.getText().isEmpty())) {
+        	newRecipe.setPrepTime(prepTimeField.getText());
+        }
+        else {
+        	create = false;
+        }
+        
         newRecipe.setImage(imagePath.getText());
    
         recipeTitle.setText("");
@@ -272,11 +341,13 @@ public class AddRecipe{
         recipeInstructions.setText("");
         mealCatagory.setSelectedIndex(0);
         mainIngredient.setSelectedIndex(0);
+        alternateIngredientsInstructions.setText("");
+        prepTimeField.setText("");
        
     }//GEN-LAST:event_addAllActionPerformed
 
     private void addIngredientActionPerformed(MouseEvent evt) {//GEN-FIRST:event_addIngredientActionPerformed
-        // TODO add your handling code here:
+        
         String ing, amnt, total, newline;
         ing = ingredient.getText();
         amnt = amount.getText();

@@ -20,6 +20,8 @@ public class Recipe implements Serializable
 	private String instructions;
 	private String category;
 	private String mainIngredient;
+	private String alternateIngredients;
+	private String prepTime;
 	
 	private ArrayList<String> comments = new ArrayList<String>();
 	private ArrayList<Double> votes = new ArrayList<Double>();
@@ -114,5 +116,20 @@ public class Recipe implements Serializable
 	
 	public int getIngredientNumber(){
 		return ingredients.size();
+	}
+	
+	public void setAlternateIngredients(String setAlternateIngredients) {
+		alternateIngredients = setAlternateIngredients;
+	}
+	
+	public String getAlternateIngredients() {
+		return alternateIngredients;
+	}
+	
+	public void setPrepTime(String setPrepTime) {
+		prepTime = setPrepTime;
+	}
+	public String getPrepTime() {
+		return prepTime;
 	}
 }

@@ -313,6 +313,7 @@ public class RecipeManager {
 		addRecipePanel.addRecipeLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(addRecipePanel.create) {
 				stage = 1;
 				recipes.add(addRecipePanel.getNewRecipe());
 				try {
@@ -324,6 +325,11 @@ public class RecipeManager {
 				frame.validate();
 				frame.repaint();				
 				setPanelStage(stage);
+				}
+				else {
+					JFrame messagePane = new JFrame();
+					JOptionPane.showMessageDialog(messagePane,"Please correctly input the recipe, only blank fields allowed is the imagePath");
+				}
 			}
 		});		
 	}
