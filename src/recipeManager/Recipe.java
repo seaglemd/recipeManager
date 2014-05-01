@@ -132,4 +132,10 @@ public class Recipe implements Serializable
 	public String getPrepTime() {
 		return prepTime;
 	}
+	public void setComment(String comment) {
+		comments.add(comment);
+	}
+	public ArrayList<String> getComment() {
+		return comments;
+	}
 }

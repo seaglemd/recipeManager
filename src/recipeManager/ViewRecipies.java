@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 public class ViewRecipies {
@@ -21,16 +23,24 @@ public class ViewRecipies {
 		private JLabel instructions;
 		private JLabel recipeImage;
 		private JLabel recipeLabel;
+		private JLabel comment;
+		protected JLabel commentLabel;
+		private JLabel comments;
 		
 		private JLabel nickRateLabel;
-		private JLabel nickLabel1;
-		private JLabel nickLabel2;
-		private JLabel nickLabel3;
-		private JLabel nickLabel4;
-		private JLabel nickLabel5;
+		protected JLabel nickLabel1;
+		protected JLabel nickLabel2;
+		protected JLabel nickLabel3;
+		protected JLabel nickLabel4;
+		protected JLabel nickLabel5;
 	
 		private ImageIcon nick;
 		private ImageIcon nickO;
+		
+		private ImageIcon commentN;
+		private ImageIcon commentO;
+		
+		private JTextField commentField;
 		
 		private Recipe viewableRecipe;
 		private JPanel viewRecipiesPanel;
@@ -53,8 +63,25 @@ public class ViewRecipies {
 		public void viewRecipe(Recipe viewRecipe) {
 			ingredients = "";
 			viewableRecipe = viewRecipe;
+			comments = new JLabel();
+			comments.setPreferredSize(new Dimension(480,200));
+			comments.setHorizontalAlignment(JLabel.LEFT);
+			comments.setHorizontalTextPosition(JLabel.LEFT);
+			comments.setVerticalAlignment(JLabel.TOP);
+			comments.setVerticalTextPosition(JLabel.TOP);
+			fillComments();
 			nick = new ImageIcon("src/nickRate.gif");
 			nickO = new ImageIcon("src/nickRateO.gif");
+			
+			commentN = new ImageIcon("src/comment.gif");
+			commentO = new ImageIcon("src/commentO.gif");
+			
+			commentLabel = new JLabel(commentN);
+			
+			comment = new JLabel("Comment: ");
+			commentField = new JTextField();
+			commentField.setColumns(30);
+			
 			
 			nickRateLabel = new JLabel("Rate: ");
 			nickLabel1 = new JLabel(nick);
@@ -62,7 +89,7 @@ public class ViewRecipies {
 			nickLabel3 = new JLabel(nick);
 			nickLabel4 = new JLabel(nick);
 			nickLabel5 = new JLabel(nick);
-			
+			commentButtonListener();
 			viewRecipiesPanel.setLayout(new BorderLayout());
 			JPanel westAlignment = new JPanel(new BorderLayout());
 
@@ -70,7 +97,13 @@ public class ViewRecipies {
 			JPanel insideInsidePanel = new JPanel(new FlowLayout());
 			JPanel instructionPanel = new JPanel(new BorderLayout());
 			JPanel alternateIngredientPanel = new JPanel(new BorderLayout());
-			JPanel ratingPanel = new JPanel(new FlowLayout());
+			JPanel ratingPanel = new JPanel(new FlowLayout());			
+			
+			JPanel commentPanel = new JPanel(new FlowLayout());		
+			commentPanel.setBackground(bgColor);
+			JScrollPane commentSPanel = new JScrollPane(commentPanel);
+			commentSPanel.setPreferredSize(new Dimension(530, 200));
+			commentSPanel.setBackground(bgColor);
 			
 			ratingPanel.setPreferredSize(new Dimension(480, 80));
 			ratingPanel.setBackground(bgColor);
@@ -129,13 +162,13 @@ public class ViewRecipies {
 			
 			instructions = new JLabel("<html><head></head><body>Instructions: <br>" + viewRecipe.getInstructions() + "</body></html>");
 			instructions.setMaximumSize(new Dimension(480,300));
-			instructions.setPreferredSize(new Dimension(480,100));
+			instructions.setPreferredSize(new Dimension(480,90));
 			instructions.setVerticalTextPosition(JLabel.TOP);
 			instructions.setVerticalAlignment(JLabel.TOP);
 			recipeLabel = new JLabel(recipeString);
 			alternateIngredientInstructions.setText("<html><body>Alternate Ingredient Instructions:<br> " + viewRecipe.getAlternateIngredients() + "<br></body></html>");
 			alternateIngredientInstructions.setMaximumSize(new Dimension(480,300));
-			alternateIngredientInstructions.setPreferredSize(new Dimension(480,80));
+			alternateIngredientInstructions.setPreferredSize(new Dimension(480,60));
 			alternateIngredientInstructions.setVerticalTextPosition(JLabel.TOP);
 			alternateIngredientInstructions.setVerticalAlignment(JLabel.TOP);
 			
@@ -143,6 +176,18 @@ public class ViewRecipies {
 			//instructionPanel.setBackground(Color.cyan);
 			alternateIngredientPanel.setBackground(Color.white);
 			alternateIngredientPanel.add(alternateIngredientInstructions);
+			commentPanel.add(comment);
+			commentPanel.add(commentField);
+			commentPanel.add(commentLabel);
+			commentPanel.add(comments);
+			commentPanel.setPreferredSize(new Dimension(480, 500));
+			commentPanel.setMaximumSize(new Dimension(480,4000));
+			commentPanel.validate();
+			commentPanel.repaint();
+			
+			commentSPanel.validate();
+			commentSPanel.repaint();
+			
 			
 			instructionPanel.validate();
 			instructionPanel.repaint();
@@ -173,6 +218,9 @@ public class ViewRecipies {
 			gc.gridy = 3;
 			insidePanel.add(ratingPanel, gc);
 			
+			gc.gridy = 4;
+			insidePanel.add(commentSPanel, gc);
+			
 			westAlignment.validate();
 			westAlignment.repaint();
 			insidePanel.validate();
@@ -180,6 +228,45 @@ public class ViewRecipies {
 			viewRecipiesPanel.validate();
 			viewRecipiesPanel.repaint();
 		}
+		
+		public void fillComments() {
+			String allComments = "<html><body>";
+			for(int i = (viewableRecipe.getComment().size()-1);i >= 0; i--) {
+				allComments += "Comment #" + i + "<br>" + viewableRecipe.getComment().get(i);
+				allComments += "<br><br>";
+			}
+			allComments += "</body></html>";
+			comments.setText(allComments);
+		}
+		
+		private void commentButtonListener() {		
+			/*adds listeners for the close button*/
+					
+				commentLabel.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						commentLabel.setIcon(commentO);			
+					}
+				});
+					
+				commentLabel.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseExited(MouseEvent e) {
+						commentLabel.setIcon(commentN);
+					}
+				});
+					
+				commentLabel.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if(!commentField.getText().isEmpty()) {
+							viewableRecipe.setComment(commentField.getText());
+							commentField.setText("");
+							viewRecipiesPanel.repaint();
+						}
+					}
+				});
+			}
 		
 		public void addNickListener() {
 			nickLabel1.addMouseListener(new MouseAdapter() {

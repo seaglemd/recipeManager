@@ -43,6 +43,8 @@ public class RecipeManager {
 	
 	private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 	private ArrayList<Recipe> selectedRecipes = new ArrayList<Recipe>();
+	protected Recipe currentRecipe;
+	private int currentRecipePos;
 		
 	private boolean bool = true;
 	public RecipeManager() {
@@ -97,11 +99,13 @@ public class RecipeManager {
 		
 			/*add main buttons to the top of the panel*/
 			frame.setLayout(new GridBagLayout());
-			GridBagConstraints c = new GridBagConstraints();			
+			GridBagConstraints c = new GridBagConstraints();
+			viewRecipies = viewRecipiesPanel.setViewRecipiesPanelDimensions();
 			newRecipeButton();			       
 			closeButton();
 			homeButtonListeners();
 			addGoButtonClickedListener();
+			
 			c.gridwidth = 2;
 			c.gridx = 0;
 			c.gridy = 0;
@@ -129,7 +133,7 @@ public class RecipeManager {
 			c.gridy = 1;
 			frame.add(selectRecipe, c);			
 			/*add viewrecipies panel to the frame*/
-			viewRecipies = viewRecipiesPanel.setViewRecipiesPanelDimensions();
+			
 			c.fill = GridBagConstraints.HORIZONTAL;		
 			c.gridx = 1;
 			c.gridy = 1;
@@ -399,9 +403,14 @@ public class RecipeManager {
 				viewRecipiesPanel.emptyPanel();
 				viewRecipies.validate();
 				viewRecipies.repaint();
+				currentRecipe = selectRecipePanel.currentRecipes.get(i);
+				currentRecipePos = i;
 				viewRecipiesPanel.viewRecipe(selectRecipePanel.currentRecipes.get(i));
 				viewRecipies.validate();
 				viewRecipies.repaint();
+				commentButtonListener();
+				voteButtonListener();
+				
 			}
 		});
 	}
@@ -420,7 +429,87 @@ public class RecipeManager {
 				setPanelStage(stage);
 			}
 		});
+	}	
+	private void commentButtonListener() {				
+		viewRecipiesPanel.commentLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				recipes.set(currentRecipePos, currentRecipe);
+				try {
+					Recipe.writeToFile(recipes);
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
+	
+	private void voteButtonListener() {
+				viewRecipiesPanel.nickLabel1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					currentRecipe.setVotes(1.0);
+					recipes.set(currentRecipePos, currentRecipe);
+					try {
+						Recipe.writeToFile(recipes);
+					} catch (ClassNotFoundException e1) {
+						e1.printStackTrace();
+					}
+					
+				}
+			});
+				viewRecipiesPanel.nickLabel2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					currentRecipe.setVotes(2.0);
+					recipes.set(currentRecipePos, currentRecipe);
+					try {
+						Recipe.writeToFile(recipes);
+					} catch (ClassNotFoundException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+				viewRecipiesPanel.nickLabel3.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					currentRecipe.setVotes(3.0);
+					recipes.set(currentRecipePos, currentRecipe);
+					try {
+						Recipe.writeToFile(recipes);
+					} catch (ClassNotFoundException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+				viewRecipiesPanel.nickLabel4.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					currentRecipe.setVotes(4.0);
+					recipes.set(currentRecipePos, currentRecipe);
+					try {
+						Recipe.writeToFile(recipes);
+					} catch (ClassNotFoundException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+				viewRecipiesPanel.nickLabel5.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					currentRecipe.setVotes(5.0);
+					recipes.set(currentRecipePos, currentRecipe);
+					try {
+						Recipe.writeToFile(recipes);
+					} catch (ClassNotFoundException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+		
+	}
+	
 		
 	public JPanel createRectPanel (int x, int y) {
 	
