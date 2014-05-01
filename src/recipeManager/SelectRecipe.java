@@ -28,8 +28,8 @@ public class SelectRecipe {
 	private ImageIcon goIcon;
 	private ImageIcon goIconO;
 	
-	private JTextField searchCriteria;
-	private JLabel goButton;
+	protected JTextField searchCriteria;
+	protected JLabel goButton;
 	protected ArrayList<JLabel> currentLabels = new ArrayList<JLabel>();
 	protected ArrayList<Recipe> currentRecipes = new ArrayList<Recipe>();
 	private int gBRows;		
@@ -124,14 +124,7 @@ public class SelectRecipe {
 			public void mouseExited(MouseEvent e) {
 				goButton.setIcon(goIcon);
 			}
-		});
-			
-		/*closeLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				frame.dispose();
-			}
-		});*/
+		});	
 
 	}
 	

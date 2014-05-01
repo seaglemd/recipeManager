@@ -38,6 +38,7 @@ public class RecipeManager {
 	private AddRecipe addRecipePanel;
 	
 	private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+	private ArrayList<Recipe> selectedRecipes = new ArrayList<Recipe>();
 		
 	private boolean bool = true;
 	public RecipeManager() {
@@ -95,6 +96,7 @@ public class RecipeManager {
 			GridBagConstraints c = new GridBagConstraints();			
 			newRecipeButton();			       
 			closeButton();
+			addGoButtonClickedListener();
 			c.gridwidth = 2;
 			c.gridx = 0;
 			c.gridy = 0;
@@ -104,8 +106,12 @@ public class RecipeManager {
 			frame.add(closeLabel, c);			       
 			
 			/*add recipe selection panel to the frame*/
-			//if(bool != false)
-			selectRecipePanel.addSelectedRecipesToPanel(recipes);
+			if(selectedRecipes.isEmpty()) {
+				selectRecipePanel.addSelectedRecipesToPanel(recipes);
+			}
+			else
+				selectRecipePanel.addSelectedRecipesToPanel(selectedRecipes);
+			
 			addListenerLoop();
 			selectRecipe = selectRecipePanel.setSelectRecipePanelDimensions();
 			
@@ -260,7 +266,7 @@ public class RecipeManager {
 		});
 		
 	}
-	
+	//Added listener for when placing in a new recipe, then writes the recipe out to file
 	private void addRecipeListener() {
 		addRecipePanel.addRecipeLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -283,6 +289,15 @@ public class RecipeManager {
 	private void addListenerLoop() {
 		for(int i = 0;i < selectRecipePanel.currentLabels.size();i++) {
 			addViewRecipeListener(i);
+		}
+	}
+	
+	private void populateSelectedRecipes(String lookFor) {
+		for(int i = 0; i < recipes.size();i++) {
+			if(recipes.get(i).getTitle().toLowerCase().contains(lookFor.toLowerCase())) {
+				selectedRecipes.add(recipes.get(i));
+			}
+			
 		}
 	}
 	
@@ -312,6 +327,22 @@ public class RecipeManager {
 				viewRecipiesPanel.viewRecipe(selectRecipePanel.currentRecipes.get(i));
 				viewRecipies.validate();
 				viewRecipies.repaint();
+			}
+		});
+	}
+	
+	private void addGoButtonClickedListener() {
+		selectRecipePanel.goButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!selectedRecipes.isEmpty()) {
+					selectedRecipes.clear();
+				}
+				populateSelectedRecipes(selectRecipePanel.searchCriteria.getText());
+				frame.getContentPane().removeAll();
+				frame.validate();
+				frame.repaint();
+				setPanelStage(stage);
 			}
 		});
 	}
