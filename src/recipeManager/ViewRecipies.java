@@ -3,6 +3,7 @@ package recipeManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public class ViewRecipies {
-	
+		
 		private JLabel title;
 		private JLabel category;
 		private JLabel mainIngredient;
@@ -22,6 +23,7 @@ public class ViewRecipies {
 		private JLabel instructions;
 		private JLabel score;
 		private JLabel recipeImage;
+		private JLabel recipeLabel;
 	
 		private JPanel viewRecipiesPanel;
 		private Color bgColor = new Color(255, 255, 255);
@@ -33,18 +35,7 @@ public class ViewRecipies {
 			viewRecipiesPanel.setBorder(new TitledBorder("View Recipes"));
 			return viewRecipiesPanel;
 		}
-		public void emptyPanel() {
-			/* if(viewRecipiesPanel.getComponentCount() > 0) {
-			viewRecipiesPanel.remove(title);
-			viewRecipiesPanel.remove(category);
-			viewRecipiesPanel.remove(mainIngredient);
-			viewRecipiesPanel.remove(ingredientLabel);
-			viewRecipiesPanel.remove(instructions);
-			viewRecipiesPanel.remove(score);
-			viewRecipiesPanel.remove(recipeImage);
-			viewRecipiesPanel.validate();
-			viewRecipiesPanel.repaint(); 
-			}*/
+		public void emptyPanel() {			
 			if(viewRecipiesPanel.getComponentCount() > 0 ){
 				viewRecipiesPanel.removeAll();
 				viewRecipiesPanel.validate();
@@ -52,8 +43,21 @@ public class ViewRecipies {
 			}
 			}
 		public void viewRecipe(Recipe viewRecipe) {
-			viewRecipiesPanel.setLayout(new BorderLayout());			
+			ingredients = "";
+			viewRecipiesPanel.setLayout(new BorderLayout());
+			JPanel westAlignment = new JPanel(new BorderLayout());
+			//GridBagConstraints vRPC = new GridBagConstraints();
+			//vRPC.anchor = GridBagConstraints.NORTH;
+			//vRPC.fill = GridBagConstraints.HORIZONTAL;
+			//vRPC.gridx = 0;
+			//vRPC.gridy = 0;
 			JPanel insidePanel = new JPanel(new GridBagLayout());
+			JPanel insideInsidePanel = new JPanel(new FlowLayout());
+			
+			viewRecipiesPanel.add(westAlignment, BorderLayout.NORTH);
+			westAlignment.add(insidePanel, BorderLayout.WEST);
+			String scoreString;
+			
 			if(viewRecipe.getImage() != null) {
 				recipeImage = new JLabel(viewRecipe.getImage());
 			}
@@ -67,56 +71,49 @@ public class ViewRecipies {
 			{
 				ArrayList<Double> votes = viewRecipe.getVotes();
 				
-				score = new JLabel(Double.toString(computeAverage(votes)));
+				scoreString = Double.toString(computeAverage(votes));
 			}
 			else {
-				score = new JLabel("<html>no score yet</html>");
+				scoreString = "no score yet";
 			}
 			
-			GridBagConstraints gc = new GridBagConstraints();			
+					
 			
-			title = new JLabel("<html>" + viewRecipe.getTitle() + "</html>");
-			category = new JLabel("<html>" + viewRecipe.getCategory() + "</html");
-			mainIngredient = new JLabel("<html>" + viewRecipe.getMainIngredient() + "</html>");
-			ingredients = "<html>";
+			
+			
 			for(int i = 0; i < viewRecipe.getIngredientNumber(); i++) {
-				ingredients += " " + (i+1) + ". " + viewRecipe.getIngredient(i) + " - " + viewRecipe.getAmount(i);
+				ingredients += " " + (i+1) + ". " + viewRecipe.getIngredient(i) + " - " + viewRecipe.getAmount(i) + "<br>";
 			}
-			ingredients += "</html>";
-			ingredientLabel = new JLabel(ingredients);
+			
+			String recipeString = "<html><font color=red><h2>" + viewRecipe.getTitle() + "</h2></font> - "
+					+ viewRecipe.getCategory() + "<br>" + scoreString + "<br>" + viewRecipe.getMainIngredient() + "<br>" + ingredients + "</html>";
 			instructions = new JLabel("<html>" + viewRecipe.getInstructions() + "</html>");
+			recipeLabel = new JLabel(recipeString);
 			
-			gc.fill = GridBagConstraints.PAGE_START;
-			gc.anchor = GridBagConstraints.FIRST_LINE_START;
-			
-			gc.gridheight = 4;
+			GridBagConstraints gc = new GridBagConstraints();	
+			//gc.fill = GridBagConstraints.PAGE_START;
+			gc.anchor = GridBagConstraints.WEST;
+			//System.out.println(recipeString);
 			gc.gridx = 0;
 			gc.gridy = 0;			
 			insidePanel.add(recipeImage, gc);
 			
-			gc.gridheight = 1;
-			gc.gridx = 1;			
-			insidePanel.add(title, gc);
-			insidePanel.add(category, gc);
-			
 			gc.gridx = 1;
-			gc.gridy = 1;
-			insidePanel.add(score, gc);
+			insideInsidePanel.add(recipeLabel);		
+			insideInsidePanel.validate();
+			insideInsidePanel.repaint();
+			insidePanel.add(insideInsidePanel,gc);
 			
-			gc.gridx = 1;
-			gc.gridy = 2;
-			insidePanel.add(mainIngredient, gc);
+			//gc.gridx = 0;
+			//gc.gridy = 1;
+			//gc.gridwidth = 2;
+			//insidePanel.add(instructions, gc);
 			
-			gc.gridx = 1;
-			gc.gridy = 3;
-			insidePanel.add(ingredientLabel, gc);
 			
-			gc.gridwidth = 2;
-			gc.gridx = 0;
-			gc.gridy = 4;
-			insidePanel.add(instructions, gc);
 			
-			viewRecipiesPanel.add(insidePanel, BorderLayout.NORTH);
+			
+			westAlignment.validate();
+			westAlignment.repaint();
 			insidePanel.validate();
 			insidePanel.repaint();
 			viewRecipiesPanel.validate();
