@@ -83,9 +83,11 @@ public class SelectRecipe {
 		
 		for(int i = 0; i < currentRecipes.size(); i++) {
 			currentLabels.get(i).setText("<html>" + currentRecipes.get(i).getTitle() + "</html>");
-			currentLabels.get(i).setOpaque(true);			
-			currentLabels.get(i).setPreferredSize(new Dimension(185, 48));
-			currentLabels.get(i).setMaximumSize(new Dimension(185, 48));
+			currentLabels.get(i).setOpaque(true);
+			currentLabels.get(i).setBorder(BorderFactory.createEtchedBorder(new Color(176,224,230), Color.gray));
+			currentLabels.get(i).setBackground(new Color(176,224,230));
+			currentLabels.get(i).setPreferredSize(new Dimension(185, 30));
+			currentLabels.get(i).setMaximumSize(new Dimension(185, 30));
 		}
 		if(insidePanel.getComponentCount() > 0) {
 			insidePanel.removeAll();

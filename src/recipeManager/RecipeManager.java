@@ -306,14 +306,15 @@ public class RecipeManager {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				selectRecipePanel.currentLabels.get(i).setBackground(new Color(0, 153, 204));
-				selectRecipePanel.currentLabels.get(i).setForeground(Color.white);					
+				selectRecipePanel.currentLabels.get(i).setForeground(Color.white);
+				selectRecipePanel.currentLabels.get(i).setBorder(BorderFactory.createLoweredSoftBevelBorder());
 			}
 		});
 			
 		selectRecipePanel.currentLabels.get(i).addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {
-				selectRecipePanel.currentLabels.get(i).setBackground(Color.white);
+				selectRecipePanel.currentLabels.get(i).setBackground(new Color(176,224,230));
 				selectRecipePanel.currentLabels.get(i).setForeground(Color.black);
 			}
 		});
