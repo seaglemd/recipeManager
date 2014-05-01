@@ -1,12 +1,8 @@
 package recipeManager;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -32,10 +28,7 @@ public class SelectRecipe {
 	protected JLabel goButton;
 	protected ArrayList<JLabel> currentLabels = new ArrayList<JLabel>();
 	protected ArrayList<Recipe> currentRecipes = new ArrayList<Recipe>();
-	private int gBRows;		
-	private GridBagLayout gbl = new GridBagLayout();
-	private GridBagConstraints gbc = new GridBagConstraints();
-	
+
 	private Color bgColor = new Color(255, 255, 255);
 	
 	

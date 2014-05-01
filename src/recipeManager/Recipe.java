@@ -2,8 +2,12 @@ package recipeManager;
 
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -34,8 +38,14 @@ public class Recipe implements Serializable
 	public ArrayList<Double> getVotes() {
 		return votes;
 	}
-	public void setImage(ImageIcon setImage) {
-		image = setImage;
+	public void setImage(String setImagePath) {
+		if(setImagePath.isEmpty()) {
+			
+		}
+		else {
+			ImageIcon setImage = new ImageIcon(setImagePath);
+			image = setImage;		
+		}
 	}
 	public ImageIcon getImage() {
 		return image;

@@ -40,9 +40,11 @@ public class AddRecipe{
     private JLabel jLabel4;
     private JLabel jLabel5;
     private JLabel jLabel6;
+    private JLabel jLabel7;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
     private JTextArea listIngredients;
+    private JTextField imagePath;
     private JComboBox mainIngredient;
     private JComboBox mealCatagory;
     private JPanel actualPanel;
@@ -73,6 +75,7 @@ public class AddRecipe{
         recipeTitle = new JTextField();
 
         ingredient = new javax.swing.JTextField();
+        imagePath = new JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -82,7 +85,8 @@ public class AddRecipe{
         mealCatagory = new JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-
+        jLabel7 = new JLabel();
+        
         jScrollPane2 = new javax.swing.JScrollPane();
         listIngredients = new javax.swing.JTextArea();
         actualPanel = new JPanel();
@@ -126,6 +130,8 @@ public class AddRecipe{
         jLabel5.setText("Main Ingredient");
 
         jLabel6.setText("Meal Catagory");
+        
+        jLabel7.setText("Picture path: ");
 
 
         listIngredients.setColumns(20);
@@ -146,10 +152,12 @@ public class AddRecipe{
                                 .addGap(18, 18, 18)
                                 .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                                 .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addComponent(mainIngredient, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(imagePath, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(mealCatagory, 0, 105, Short.MAX_VALUE)))
                             .addGroup(panCreateLayout.createSequentialGroup()
                                 .addGap(57, 57, 57)
@@ -209,6 +217,10 @@ public class AddRecipe{
                             .addComponent(jLabel5)
                             .addComponent(mainIngredient, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
+                        .addGroup(panCreateLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(imagePath, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(addRecipeLabel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -227,7 +239,7 @@ public class AddRecipe{
                 .addComponent(panCreate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 22, Short.MAX_VALUE))
         );
-        listIngredients.setEditable(false);
+        listIngredients.setEditable(false);        
         panCreate.setSize(new Dimension(480,670));
         panCreate.validate();
         panCreate.doLayout();
@@ -251,6 +263,7 @@ public class AddRecipe{
         newRecipe.setInstructions(recipeInstructions.getText());
         newRecipe.setCategory(categoryArray[mealCatagory.getSelectedIndex()]);
         newRecipe.setMainIngredient(mainIngredientArray[mainIngredient.getSelectedIndex()]);
+        newRecipe.setImage(imagePath.getText());
    
         recipeTitle.setText("");
         ingredient.setText("");

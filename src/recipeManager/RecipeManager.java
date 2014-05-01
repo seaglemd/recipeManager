@@ -28,6 +28,10 @@ public class RecipeManager {
 	private JLabel newRecipeLabel;
 	private ImageIcon newRecipeIcon;
 	private ImageIcon newRecipeIconO;	
+	
+	private JLabel homeLabel;
+	private ImageIcon homeIcon;
+	private ImageIcon homeIconO;
 	/*main color for the panels/frame*/
 	private Color bgColor = new Color(255, 255, 255);
 	
@@ -96,12 +100,15 @@ public class RecipeManager {
 			GridBagConstraints c = new GridBagConstraints();			
 			newRecipeButton();			       
 			closeButton();
+			homeButtonListeners();
 			addGoButtonClickedListener();
 			c.gridwidth = 2;
 			c.gridx = 0;
 			c.gridy = 0;
 			c.anchor = GridBagConstraints.FIRST_LINE_START;
 			frame.add(newRecipeLabel, c);
+			c.gridx = 1;
+			frame.add(homeLabel, c);
 			c.anchor = GridBagConstraints.FIRST_LINE_END;	
 			frame.add(closeLabel, c);			       
 			
@@ -143,6 +150,7 @@ public class RecipeManager {
 			c.gridy = 0;
 			c.anchor = GridBagConstraints.FIRST_LINE_START;
 			frame.add(newRecipeLabel, c);
+			frame.add(homeLabel, c);
 			c.anchor = GridBagConstraints.FIRST_LINE_END;	       
 			frame.add(closeLabel, c);
 			//frame.validate();			       
@@ -177,11 +185,13 @@ public class RecipeManager {
 			GridBagConstraints c = new GridBagConstraints();			
 			newRecipeButton();			       
 			closeButton();
+			homeButtonListeners();
 			c.gridwidth = 2;
 			c.gridx = 0;
 			c.gridy = 0;
 			c.anchor = GridBagConstraints.FIRST_LINE_START;
-			frame.add(newRecipeLabel, c);
+			//frame.add(newRecipeLabel, c);
+			frame.add(homeLabel, c);
 			c.anchor = GridBagConstraints.FIRST_LINE_END;	
 			frame.add(closeLabel, c);			       
 			
@@ -266,6 +276,38 @@ public class RecipeManager {
 		});
 		
 	}
+	/*addHomeButtonstuff*/
+	private void homeButtonListeners() {
+		homeIcon = new ImageIcon("src/home.gif");
+		homeIconO = new ImageIcon("src/homeO.gif");
+		homeLabel = new JLabel(homeIcon);		
+			
+		homeLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				homeLabel.setIcon(homeIconO);			
+			}
+		});
+			
+		homeLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseExited(MouseEvent e) {
+				homeLabel.setIcon(homeIcon);
+			}
+		});
+			
+		homeLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				stage = 1;
+				frame.getContentPane().removeAll();
+				frame.validate();
+				frame.repaint();
+				setPanelStage(stage);
+			}
+		});
+		
+	}
 	//Added listener for when placing in a new recipe, then writes the recipe out to file
 	private void addRecipeListener() {
 		addRecipePanel.addRecipeLabel.addMouseListener(new MouseAdapter() {
@@ -293,11 +335,37 @@ public class RecipeManager {
 	}
 	
 	private void populateSelectedRecipes(String lookFor) {
+		boolean addSelectedRecipe = true;
 		for(int i = 0; i < recipes.size();i++) {
 			if(recipes.get(i).getTitle().toLowerCase().contains(lookFor.toLowerCase())) {
 				selectedRecipes.add(recipes.get(i));
+			}			
+		}
+		for(int i = 0; i < recipes.size();i++) {
+			if(recipes.get(i).getCategory().toLowerCase().contains(lookFor.toLowerCase())) {
+				for(int j = 0;j < selectedRecipes.size();j++) {
+					if(selectedRecipes.get(j).getTitle().compareToIgnoreCase(recipes.get(i).getTitle()) == 0){
+						addSelectedRecipe = false;
+					}
+					if(addSelectedRecipe == true){
+						selectedRecipes.add(recipes.get(i));
+					}
+				}
+				
 			}
-			
+		}
+		for(int i = 0; i < recipes.size();i++) {
+			if(recipes.get(i).getMainIngredient().toLowerCase().contains(lookFor.toLowerCase())) {
+				for(int j = 0;j < selectedRecipes.size();j++) {
+					if(selectedRecipes.get(j).getTitle().compareToIgnoreCase(recipes.get(i).getTitle()) == 0){
+						addSelectedRecipe = false;
+					}
+					if(addSelectedRecipe == true){
+						selectedRecipes.add(recipes.get(i));
+					}
+				}
+				
+			}
 		}
 	}
 	

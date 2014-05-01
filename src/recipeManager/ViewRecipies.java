@@ -15,13 +15,8 @@ import javax.swing.border.TitledBorder;
 
 public class ViewRecipies {
 		
-		private JLabel title;
-		private JLabel category;
-		private JLabel mainIngredient;
 		private String ingredients;
-		private JLabel ingredientLabel;
 		private JLabel instructions;
-		private JLabel score;
 		private JLabel recipeImage;
 		private JLabel recipeLabel;
 	
@@ -62,6 +57,9 @@ public class ViewRecipies {
 			
 			if(viewRecipe.getImage() != null) {
 				recipeImage = new JLabel(viewRecipe.getImage());
+				recipeImage.setSize(new Dimension(200,200));
+				recipeImage.setPreferredSize(new Dimension(200,200));
+				recipeImage.setMinimumSize(new Dimension(200,200));
 			}
 			else{
 				recipeImage = new JLabel(new ImageIcon("src/noImage.gif"));
