@@ -135,8 +135,8 @@ public class AddRecipe{
         recipeInstructions.setWrapStyleWord(true);
         recipeInstructions.setBorder(BorderFactory.createLineBorder(Color.black));
         
-        categoryArray = new String[] { "Select", "Breakfast", "Lunch", "Dinner", "Dessert", "Snack" };
-        mainIngredientArray = new String[] { "Select", "Beef", "Chicken", "Pork", "Dairy", "Sweets", "Bread" };
+        categoryArray = new String[] { "Select", "Breakfast", "Lunch", "Dinner", "Dessert", "Snack", "Other" };
+        mainIngredientArray = new String[] { "Select", "Beef", "Chicken", "Pork", "Dairy", "Sweets", "Bread", "Health" };
         
         mainIngredient.setModel(new DefaultComboBoxModel(mainIngredientArray));
 

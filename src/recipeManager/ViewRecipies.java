@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -19,7 +21,18 @@ public class ViewRecipies {
 		private JLabel instructions;
 		private JLabel recipeImage;
 		private JLabel recipeLabel;
+		
+		private JLabel nickRateLabel;
+		private JLabel nickLabel1;
+		private JLabel nickLabel2;
+		private JLabel nickLabel3;
+		private JLabel nickLabel4;
+		private JLabel nickLabel5;
 	
+		private ImageIcon nick;
+		private ImageIcon nickO;
+		
+		private Recipe viewableRecipe;
 		private JPanel viewRecipiesPanel;
 		private Color bgColor = new Color(255, 255, 255);
 		
@@ -36,15 +49,43 @@ public class ViewRecipies {
 				viewRecipiesPanel.validate();
 				viewRecipiesPanel.repaint();
 			}
-			}
+		}
 		public void viewRecipe(Recipe viewRecipe) {
 			ingredients = "";
+			viewableRecipe = viewRecipe;
+			nick = new ImageIcon("src/nickRate.gif");
+			nickO = new ImageIcon("src/nickRateO.gif");
+			
+			nickRateLabel = new JLabel("Rate: ");
+			nickLabel1 = new JLabel(nick);
+			nickLabel2 = new JLabel(nick);
+			nickLabel3 = new JLabel(nick);
+			nickLabel4 = new JLabel(nick);
+			nickLabel5 = new JLabel(nick);
+			
 			viewRecipiesPanel.setLayout(new BorderLayout());
 			JPanel westAlignment = new JPanel(new BorderLayout());
 
 			JPanel insidePanel = new JPanel(new GridBagLayout());
 			JPanel insideInsidePanel = new JPanel(new FlowLayout());
-			JPanel instructionPanel = new JPanel(new BorderLayout());			
+			JPanel instructionPanel = new JPanel(new BorderLayout());
+			JPanel alternateIngredientPanel = new JPanel(new BorderLayout());
+			JPanel ratingPanel = new JPanel(new FlowLayout());
+			
+			ratingPanel.setPreferredSize(new Dimension(480, 80));
+			ratingPanel.setBackground(bgColor);
+			addNickListener();
+			ratingPanel.add(nickRateLabel);
+			ratingPanel.add(nickLabel1);
+			ratingPanel.add(nickLabel2);
+			ratingPanel.add(nickLabel3);
+			ratingPanel.add(nickLabel4);
+			ratingPanel.add(nickLabel5);
+			ratingPanel.validate();
+			ratingPanel.repaint();
+			addNickListener();
+			
+			JLabel alternateIngredientInstructions = new JLabel();
 			
 			westAlignment.setBackground(bgColor);
 			insidePanel.setBackground(bgColor);
@@ -83,18 +124,25 @@ public class ViewRecipies {
 			}
 			
 			String recipeString = "<html><head></head><body><font color=\"red\"><h2>" + viewRecipe.getTitle() + "</h2></font> Category: "
-					+ viewRecipe.getCategory() + "<br>Rating: " + scoreString + "<br>Main Ingredient: " + viewRecipe.getMainIngredient() + "<br><br>Ingredients:<br>" + ingredients + "</body></html>";
-			String subInstructions = viewRecipe.getInstructions();
-			int panelSize = 30 * (subInstructions.length()/100);
-			
+					+ viewRecipe.getCategory() + "<br>PrepTime: " + viewRecipe.getPrepTime() + "<br>Rating: " + scoreString + "<br>Main Ingredient: " + viewRecipe.getMainIngredient() + "<br><br>Ingredients:<br>" + ingredients + "</body></html>";
+					
 			
 			instructions = new JLabel("<html><head></head><body>Instructions: <br>" + viewRecipe.getInstructions() + "</body></html>");
 			instructions.setMaximumSize(new Dimension(480,300));
-			instructions.setPreferredSize(new Dimension(480,300));
+			instructions.setPreferredSize(new Dimension(480,100));
 			instructions.setVerticalTextPosition(JLabel.TOP);
 			instructions.setVerticalAlignment(JLabel.TOP);
 			recipeLabel = new JLabel(recipeString);
+			alternateIngredientInstructions.setText("<html><body>Alternate Ingredient Instructions:<br> " + viewRecipe.getAlternateIngredients() + "<br></body></html>");
+			alternateIngredientInstructions.setMaximumSize(new Dimension(480,300));
+			alternateIngredientInstructions.setPreferredSize(new Dimension(480,80));
+			alternateIngredientInstructions.setVerticalTextPosition(JLabel.TOP);
+			alternateIngredientInstructions.setVerticalAlignment(JLabel.TOP);
+			
 			instructionPanel.add(instructions, BorderLayout.NORTH);
+			//instructionPanel.setBackground(Color.cyan);
+			alternateIngredientPanel.setBackground(Color.white);
+			alternateIngredientPanel.add(alternateIngredientInstructions);
 			
 			instructionPanel.validate();
 			instructionPanel.repaint();
@@ -117,7 +165,13 @@ public class ViewRecipies {
 			gc.gridy = 1;
 			gc.gridx = 0;
 			gc.anchor = GridBagConstraints.NORTH;
-			insidePanel.add(instructionPanel, gc);			
+			insidePanel.add(instructionPanel, gc);	
+			
+			gc.gridy = 2;
+			insidePanel.add(alternateIngredientPanel, gc);
+			
+			gc.gridy = 3;
+			insidePanel.add(ratingPanel, gc);
 			
 			westAlignment.validate();
 			westAlignment.repaint();
@@ -126,6 +180,129 @@ public class ViewRecipies {
 			viewRecipiesPanel.validate();
 			viewRecipiesPanel.repaint();
 		}
+		
+		public void addNickListener() {
+			nickLabel1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					nickLabel1.setIcon(nickO);			
+				}
+			});
+				
+			nickLabel1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseExited(MouseEvent e) {
+					nickLabel1.setIcon(nick);
+				}
+			});
+			nickLabel2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					nickLabel1.setIcon(nickO);
+					nickLabel2.setIcon(nickO);			
+				}
+			});
+				
+			nickLabel2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseExited(MouseEvent e) {
+					nickLabel1.setIcon(nick);
+					nickLabel2.setIcon(nick);
+				}
+			});
+			nickLabel3.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					nickLabel1.setIcon(nickO);
+					nickLabel2.setIcon(nickO);
+					nickLabel3.setIcon(nickO);			
+				}
+			});
+				
+			nickLabel3.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseExited(MouseEvent e) {					
+					nickLabel1.setIcon(nick);
+					nickLabel2.setIcon(nick);
+					nickLabel3.setIcon(nick);
+				}
+			});
+			nickLabel4.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					nickLabel1.setIcon(nickO);
+					nickLabel2.setIcon(nickO);
+					nickLabel3.setIcon(nickO);
+					nickLabel4.setIcon(nickO);			
+				}
+			});
+				
+			nickLabel4.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseExited(MouseEvent e) {
+					nickLabel1.setIcon(nick);
+					nickLabel2.setIcon(nick);
+					nickLabel3.setIcon(nick);
+					nickLabel4.setIcon(nick);
+					
+				}
+			});
+			nickLabel5.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					nickLabel1.setIcon(nickO);
+					nickLabel2.setIcon(nickO);
+					nickLabel3.setIcon(nickO);
+					nickLabel4.setIcon(nickO);
+					nickLabel5.setIcon(nickO);			
+				}
+			});
+				
+			nickLabel5.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseExited(MouseEvent e) {
+					nickLabel1.setIcon(nick);
+					nickLabel2.setIcon(nick);
+					nickLabel3.setIcon(nick);
+					nickLabel4.setIcon(nick);
+					nickLabel5.setIcon(nick);
+					
+				}
+			});
+				
+			nickLabel1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					viewableRecipe.setVotes(1.0);
+				}
+			});
+			nickLabel2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					viewableRecipe.setVotes(2.0);
+				}
+			});
+			nickLabel3.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					viewableRecipe.setVotes(3.0);
+				}
+			});
+			nickLabel4.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					viewableRecipe.setVotes(4.0);
+				}
+			});
+			nickLabel5.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					viewableRecipe.setVotes(5.0);
+				}
+			});
+		}
+		///public void setVotes()
+		
 		
 		public double computeAverage(ArrayList<Double> votes) {
 			double average = 0;
