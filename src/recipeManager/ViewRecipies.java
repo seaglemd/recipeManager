@@ -53,6 +53,9 @@ public class ViewRecipies {
 			//vRPC.gridy = 0;
 			JPanel insidePanel = new JPanel(new GridBagLayout());
 			JPanel insideInsidePanel = new JPanel(new FlowLayout());
+			westAlignment.setBackground(bgColor);
+			insidePanel.setBackground(bgColor);
+			insideInsidePanel.setBackground(bgColor);
 			
 			viewRecipiesPanel.add(westAlignment, BorderLayout.NORTH);
 			westAlignment.add(insidePanel, BorderLayout.WEST);
@@ -74,7 +77,7 @@ public class ViewRecipies {
 				scoreString = Double.toString(computeAverage(votes));
 			}
 			else {
-				scoreString = "no score yet";
+				scoreString = "No rating yet!";
 			}
 			
 					
@@ -85,9 +88,9 @@ public class ViewRecipies {
 				ingredients += " " + (i+1) + ". " + viewRecipe.getIngredient(i) + " - " + viewRecipe.getAmount(i) + "<br>";
 			}
 			
-			String recipeString = "<html><font color=red><h2>" + viewRecipe.getTitle() + "</h2></font> - "
-					+ viewRecipe.getCategory() + "<br>" + scoreString + "<br>" + viewRecipe.getMainIngredient() + "<br>" + ingredients + "</html>";
-			instructions = new JLabel("<html>" + viewRecipe.getInstructions() + "</html>");
+			String recipeString = "<html><head></head><body><font color=\"red\"><h2>" + viewRecipe.getTitle() + "</h2></font> Category: "
+					+ viewRecipe.getCategory() + "<br>Rating: " + scoreString + "<br>Main Ingredient: " + viewRecipe.getMainIngredient() + "<br><br>Ingredients:<br>" + ingredients + "</body></html>";
+			instructions = new JLabel("<html>Instructions: <br>" + viewRecipe.getInstructions() + "</html>");
 			recipeLabel = new JLabel(recipeString);
 			
 			GridBagConstraints gc = new GridBagConstraints();	
@@ -104,13 +107,10 @@ public class ViewRecipies {
 			insideInsidePanel.repaint();
 			insidePanel.add(insideInsidePanel,gc);
 			
-			//gc.gridx = 0;
-			//gc.gridy = 1;
-			//gc.gridwidth = 2;
-			//insidePanel.add(instructions, gc);
-			
-			
-			
+			gc.gridwidth = 2;
+			gc.gridy = 1;
+			gc.gridx = 0;
+			insidePanel.add(instructions, gc);			
 			
 			westAlignment.validate();
 			westAlignment.repaint();
