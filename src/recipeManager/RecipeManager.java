@@ -45,6 +45,7 @@ public class RecipeManager {
 	private ArrayList<Recipe> selectedRecipes = new ArrayList<Recipe>();
 	protected Recipe currentRecipe;
 	private int currentRecipePos;
+	private boolean deleteable = true;
 		
 	private boolean bool = true;
 	public RecipeManager() {
@@ -64,6 +65,7 @@ public class RecipeManager {
 			
 		}
 		
+		
 		//Create and set up the window. 
 		frame = new JFrame("Recipe Manager");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +74,7 @@ public class RecipeManager {
 		viewRecipiesPanel = new ViewRecipies();
 		selectRecipePanel = new SelectRecipe();
 		addRecipePanel = new AddRecipe();
-		 
+		
 		/*display the main frame and set the size and bgcolor etc*/
 		frame.setSize(820,700);
 		frame.setLocationRelativeTo(null);
@@ -104,6 +106,7 @@ public class RecipeManager {
 			newRecipeButton();			       
 			closeButton();
 			homeButtonListeners();
+			ComponentMover cm = new ComponentMover(frame, homeLabel);
 			addGoButtonClickedListener();
 			
 			c.gridwidth = 2;
@@ -408,6 +411,8 @@ public class RecipeManager {
 				viewRecipiesPanel.viewRecipe(selectRecipePanel.currentRecipes.get(i));
 				viewRecipies.validate();
 				viewRecipies.repaint();
+				deleteable = true;
+				deleteButtonListener();
 				commentButtonListener();
 				voteButtonListener();
 				
@@ -441,9 +446,47 @@ public class RecipeManager {
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				}
+				viewRecipiesPanel.emptyPanel();
+				viewRecipies.validate();
+				viewRecipies.repaint();
+				viewRecipiesPanel.viewRecipe(currentRecipe);
+				viewRecipies.validate();
+				viewRecipies.repaint();
+				deleteable = true;
+				deleteButtonListener();
+				commentButtonListener();
+				voteButtonListener();
 			}
 		});
 	}
+	
+	private void deleteButtonListener() {
+		viewRecipiesPanel.deleteLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(deleteable){
+				recipes.remove(currentRecipePos);
+				try {
+					Recipe.writeToFile(recipes);
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				}
+				viewRecipiesPanel.emptyPanel();
+				viewRecipies.validate();
+				viewRecipies.repaint();
+				currentRecipePos = 0;
+				deleteable = false;
+				currentRecipe = null;
+				stage = 1;
+				frame.getContentPane().removeAll();
+				frame.validate();
+				frame.repaint();
+				setPanelStage(stage);
+			}
+		});
+	}	
+	
 	
 	private void voteButtonListener() {
 				viewRecipiesPanel.nickLabel1.addMouseListener(new MouseAdapter() {
@@ -456,6 +499,16 @@ public class RecipeManager {
 					} catch (ClassNotFoundException e1) {
 						e1.printStackTrace();
 					}
+					viewRecipiesPanel.emptyPanel();
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					viewRecipiesPanel.viewRecipe(currentRecipe);
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					deleteable = true;
+					deleteButtonListener();
+					commentButtonListener();
+					voteButtonListener();
 					
 				}
 			});
@@ -469,6 +522,16 @@ public class RecipeManager {
 					} catch (ClassNotFoundException e1) {
 						e1.printStackTrace();
 					}
+					viewRecipiesPanel.emptyPanel();
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					viewRecipiesPanel.viewRecipe(currentRecipe);
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					deleteable = true;
+					deleteButtonListener();
+					commentButtonListener();
+					voteButtonListener();
 				}
 			});
 				viewRecipiesPanel.nickLabel3.addMouseListener(new MouseAdapter() {
@@ -481,6 +544,16 @@ public class RecipeManager {
 					} catch (ClassNotFoundException e1) {
 						e1.printStackTrace();
 					}
+					viewRecipiesPanel.emptyPanel();
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					viewRecipiesPanel.viewRecipe(currentRecipe);
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					deleteable = true;
+					deleteButtonListener();
+					commentButtonListener();
+					voteButtonListener();
 				}
 			});
 				viewRecipiesPanel.nickLabel4.addMouseListener(new MouseAdapter() {
@@ -493,6 +566,16 @@ public class RecipeManager {
 					} catch (ClassNotFoundException e1) {
 						e1.printStackTrace();
 					}
+					viewRecipiesPanel.emptyPanel();
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					viewRecipiesPanel.viewRecipe(currentRecipe);
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					deleteable = true;
+					deleteButtonListener();
+					commentButtonListener();
+					voteButtonListener();
 				}
 			});
 				viewRecipiesPanel.nickLabel5.addMouseListener(new MouseAdapter() {
@@ -505,6 +588,16 @@ public class RecipeManager {
 					} catch (ClassNotFoundException e1) {
 						e1.printStackTrace();
 					}
+					viewRecipiesPanel.emptyPanel();
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					viewRecipiesPanel.viewRecipe(currentRecipe);
+					viewRecipies.validate();
+					viewRecipies.repaint();
+					deleteable = true;
+					deleteButtonListener();
+					commentButtonListener();
+					voteButtonListener();
 				}
 			});
 		

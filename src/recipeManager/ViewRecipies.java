@@ -26,6 +26,7 @@ public class ViewRecipies {
 		private JLabel comment;
 		protected JLabel commentLabel;
 		private JLabel comments;
+		protected JLabel deleteLabel;
 		
 		private JLabel nickRateLabel;
 		protected JLabel nickLabel1;
@@ -39,6 +40,9 @@ public class ViewRecipies {
 		
 		private ImageIcon commentN;
 		private ImageIcon commentO;
+		
+		private ImageIcon delete;
+		private ImageIcon deleteO;
 		
 		private JTextField commentField;
 		
@@ -62,6 +66,7 @@ public class ViewRecipies {
 		}
 		public void viewRecipe(Recipe viewRecipe) {
 			ingredients = "";
+			
 			viewableRecipe = viewRecipe;
 			comments = new JLabel();
 			comments.setPreferredSize(new Dimension(480,200));
@@ -76,6 +81,11 @@ public class ViewRecipies {
 			commentN = new ImageIcon("src/comment.gif");
 			commentO = new ImageIcon("src/commentO.gif");
 			
+			
+			delete = new ImageIcon("src/delete.gif");
+			deleteO = new ImageIcon("src/deleteO.gif");
+			
+			deleteLabel = new JLabel(delete);
 			commentLabel = new JLabel(commentN);
 			
 			comment = new JLabel("Comment: ");
@@ -90,6 +100,7 @@ public class ViewRecipies {
 			nickLabel4 = new JLabel(nick);
 			nickLabel5 = new JLabel(nick);
 			commentButtonListener();
+			deleteButtonListener();
 			viewRecipiesPanel.setLayout(new BorderLayout());
 			JPanel westAlignment = new JPanel(new BorderLayout());
 
@@ -157,9 +168,9 @@ public class ViewRecipies {
 			}
 			
 			String recipeString = "<html><head></head><body><font color=\"red\"><h2>" + viewRecipe.getTitle() + "</h2></font> Category: "
-					+ viewRecipe.getCategory() + "<br>PrepTime: " + viewRecipe.getPrepTime() + "<br>Rating: " + scoreString + "<br>Main Ingredient: " + viewRecipe.getMainIngredient() + "<br><br>Ingredients:<br>" + ingredients + "</body></html>";
-					
-			
+					+ viewRecipe.getCategory() + "<br>PrepTime: " + viewRecipe.getPrepTime() + "<br>Rating: " + scoreString + "<br>Main Ingredient: " + viewRecipe.getMainIngredient() 
+					+ "<br><br>Ingredients:<br>" + ingredients + "</body></html>";
+
 			instructions = new JLabel("<html><head></head><body>Instructions: <br>" + viewRecipe.getInstructions() + "</body></html>");
 			instructions.setMaximumSize(new Dimension(480,300));
 			instructions.setPreferredSize(new Dimension(480,90));
@@ -201,7 +212,8 @@ public class ViewRecipies {
 			insidePanel.add(recipeImage, gc);
 			
 			gc.gridx = 1;
-			insideInsidePanel.add(recipeLabel);		
+			insideInsidePanel.add(recipeLabel);
+			insideInsidePanel.add(deleteLabel);
 			insideInsidePanel.validate();
 			insideInsidePanel.repaint();
 			insidePanel.add(insideInsidePanel,gc);
@@ -266,6 +278,25 @@ public class ViewRecipies {
 						}
 					}
 				});
+			}
+		
+		private void deleteButtonListener() {		
+			/*adds listeners for the close button*/
+					
+				deleteLabel.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						deleteLabel.setIcon(deleteO);			
+					}
+				});
+					
+				deleteLabel.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseExited(MouseEvent e) {
+						deleteLabel.setIcon(delete);
+					}
+				});					
+				
 			}
 		
 		public void addNickListener() {
@@ -361,6 +392,10 @@ public class ViewRecipies {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					viewableRecipe.setVotes(1.0);
+					//insidePanel.validate();
+					//insidePanel.repaint();
+					viewRecipiesPanel.validate();
+					viewRecipiesPanel.repaint();
 				}
 			});
 			nickLabel2.addMouseListener(new MouseAdapter() {
