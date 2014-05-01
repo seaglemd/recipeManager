@@ -274,9 +274,7 @@ public class RecipeManager {
 				}
 				frame.getContentPane().removeAll();
 				frame.validate();
-				frame.repaint();
-				selectRecipePanel.addSelectedRecipesToPanel(recipes);
-				addListenerLoop();
+				frame.repaint();				
 				setPanelStage(stage);
 			}
 		});		

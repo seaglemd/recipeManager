@@ -23,7 +23,7 @@ public class SelectRecipe {
 	private JPanel selectRecipePanel;
 	private JPanel insidePanel;	
 	protected ArrayList<JLabel> currentLabels = new ArrayList<JLabel>();
-	protected ArrayList<Recipe> currentRecipes;
+	protected ArrayList<Recipe> currentRecipes = new ArrayList<Recipe>();
 	private int gBRows;		
 	private GridBagLayout gbl = new GridBagLayout();
 	private GridBagConstraints gbc = new GridBagConstraints();
@@ -54,16 +54,27 @@ public class SelectRecipe {
 	}
 	//adds the selected recipes to the selection panel
 	public void addSelectedRecipesToPanel(ArrayList<Recipe> selectedRecipes) {
-		currentRecipes = selectedRecipes;
-		for(int i = 0; i <selectedRecipes.size();i++) {
+		if(currentRecipes.size() > 0) {
+			currentRecipes.clear();
+			currentLabels.clear();
+		}
+		for(int i = 0; i < selectedRecipes.size(); i++) {
+			currentRecipes.add(selectedRecipes.get(i));
+		}
+		
+		for(int i = 0; i <currentRecipes.size();i++) {
 			currentLabels.add(new JLabel());
 		}
 		
-		for(int i = 0; i < currentLabels.size(); i++) {
-			currentLabels.get(i).setText("<html>" + selectedRecipes.get(i).getTitle() + "</html>");
+		for(int i = 0; i < currentRecipes.size(); i++) {
+			currentLabels.get(i).setText("<html>" + currentRecipes.get(i).getTitle() + "</html>");
 			currentLabels.get(i).setOpaque(true);			
 			currentLabels.get(i).setPreferredSize(new Dimension(185, 50));
 			currentLabels.get(i).setMaximumSize(new Dimension(185, 50));
+		}
+		if(insidePanel.getComponentCount() > 0) {
+			insidePanel.removeAll();
+			insidePanel.validate();
 		}
 		for(int i = 0; i < currentLabels.size(); i++) {						
 			insidePanel.add(currentLabels.get(i));

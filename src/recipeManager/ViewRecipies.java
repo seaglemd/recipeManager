@@ -46,16 +46,15 @@ public class ViewRecipies {
 			ingredients = "";
 			viewRecipiesPanel.setLayout(new BorderLayout());
 			JPanel westAlignment = new JPanel(new BorderLayout());
-			//GridBagConstraints vRPC = new GridBagConstraints();
-			//vRPC.anchor = GridBagConstraints.NORTH;
-			//vRPC.fill = GridBagConstraints.HORIZONTAL;
-			//vRPC.gridx = 0;
-			//vRPC.gridy = 0;
+
 			JPanel insidePanel = new JPanel(new GridBagLayout());
 			JPanel insideInsidePanel = new JPanel(new FlowLayout());
+			JPanel instructionPanel = new JPanel(new BorderLayout());			
+			
 			westAlignment.setBackground(bgColor);
 			insidePanel.setBackground(bgColor);
 			insideInsidePanel.setBackground(bgColor);
+			instructionPanel.setBackground(bgColor);
 			
 			viewRecipiesPanel.add(westAlignment, BorderLayout.NORTH);
 			westAlignment.add(insidePanel, BorderLayout.WEST);
@@ -79,10 +78,7 @@ public class ViewRecipies {
 			else {
 				scoreString = "No rating yet!";
 			}
-			
-					
-			
-			
+				
 			
 			for(int i = 0; i < viewRecipe.getIngredientNumber(); i++) {
 				ingredients += " " + (i+1) + ". " + viewRecipe.getIngredient(i) + " - " + viewRecipe.getAmount(i) + "<br>";
@@ -90,8 +86,20 @@ public class ViewRecipies {
 			
 			String recipeString = "<html><head></head><body><font color=\"red\"><h2>" + viewRecipe.getTitle() + "</h2></font> Category: "
 					+ viewRecipe.getCategory() + "<br>Rating: " + scoreString + "<br>Main Ingredient: " + viewRecipe.getMainIngredient() + "<br><br>Ingredients:<br>" + ingredients + "</body></html>";
-			instructions = new JLabel("<html>Instructions: <br>" + viewRecipe.getInstructions() + "</html>");
+			String subInstructions = viewRecipe.getInstructions();
+			int panelSize = 30 * (subInstructions.length()/100);
+			
+			
+			instructions = new JLabel("<html><head></head><body>Instructions: <br>" + viewRecipe.getInstructions() + "</body></html>");
+			instructions.setMaximumSize(new Dimension(480,300));
+			instructions.setPreferredSize(new Dimension(480,300));
+			instructions.setVerticalTextPosition(JLabel.TOP);
+			instructions.setVerticalAlignment(JLabel.TOP);
 			recipeLabel = new JLabel(recipeString);
+			instructionPanel.add(instructions, BorderLayout.NORTH);
+			
+			instructionPanel.validate();
+			instructionPanel.repaint();
 			
 			GridBagConstraints gc = new GridBagConstraints();	
 			//gc.fill = GridBagConstraints.PAGE_START;
@@ -110,7 +118,8 @@ public class ViewRecipies {
 			gc.gridwidth = 2;
 			gc.gridy = 1;
 			gc.gridx = 0;
-			insidePanel.add(instructions, gc);			
+			gc.anchor = GridBagConstraints.NORTH;
+			insidePanel.add(instructionPanel, gc);			
 			
 			westAlignment.validate();
 			westAlignment.repaint();
