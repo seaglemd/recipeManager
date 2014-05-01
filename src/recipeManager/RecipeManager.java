@@ -265,7 +265,7 @@ public class RecipeManager {
 		addRecipePanel.addRecipeLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				stage = 3;
+				stage = 1;
 				recipes.add(addRecipePanel.getNewRecipe());
 				try {
 					Recipe.writeToFile(recipes);
@@ -275,6 +275,8 @@ public class RecipeManager {
 				frame.getContentPane().removeAll();
 				frame.validate();
 				frame.repaint();
+				selectRecipePanel.addSelectedRecipesToPanel(recipes);
+				addListenerLoop();
 				setPanelStage(stage);
 			}
 		});		
@@ -310,6 +312,8 @@ public class RecipeManager {
 				viewRecipies.validate();
 				viewRecipies.repaint();
 				viewRecipiesPanel.viewRecipe(selectRecipePanel.currentRecipes.get(i));
+				viewRecipies.validate();
+				viewRecipies.repaint();
 			}
 		});
 	}

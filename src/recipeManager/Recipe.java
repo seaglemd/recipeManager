@@ -18,7 +18,7 @@ public class Recipe implements Serializable
 	private String mainIngredient;
 	
 	private ArrayList<String> comments = new ArrayList<String>();
-	private ArrayList<String> votes = new ArrayList<String>();
+	private ArrayList<Double> votes = new ArrayList<Double>();
 	private ImageIcon image;
 	
 	
@@ -28,7 +28,18 @@ public class Recipe implements Serializable
 	public String getTitle() {
 		return title;
 	}
-	
+	public void setVotes(double setVote) {
+		votes.add(setVote);
+	}
+	public ArrayList<Double> getVotes() {
+		return votes;
+	}
+	public void setImage(ImageIcon setImage) {
+		image = setImage;
+	}
+	public ImageIcon getImage() {
+		return image;
+	}
 	public void setIngredients(String setIngredient) {
 		ingredients.add(setIngredient);
 	}
