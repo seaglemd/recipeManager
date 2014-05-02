@@ -344,6 +344,8 @@ public class AddRecipe{
         alternateIngredientsInstructions.setText("");
         prepTimeField.setText("");
         actualPanel.removeAll();
+        curIngredient.clear();
+        curAmount.clear();
         initComponents();
         count = 1;
        
