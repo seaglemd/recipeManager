@@ -343,6 +343,9 @@ public class AddRecipe{
         mainIngredient.setSelectedIndex(0);
         alternateIngredientsInstructions.setText("");
         prepTimeField.setText("");
+        actualPanel.removeAll();
+        initComponents();
+        count = 1;
        
     }//GEN-LAST:event_addAllActionPerformed
 
